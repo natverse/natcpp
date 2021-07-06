@@ -12,6 +12,8 @@ Description: Fast functions implemented in C++ via Rcpp to support the
     package will automatically use routines from this package when it is
     available to enable large performance gains.
 License: What license is it under?
+URL: https://github.com/jefferis/natcpp
+BugReports: https://github.com/jefferis/natcpp/issues
 Imports: 
     Rcpp (>= 1.0.6)
 Suggests: 
@@ -20,5 +22,3 @@ LinkingTo:
     Rcpp
 Config/testthat/edition: 3
 Encoding: UTF-8
-URL: https://github.com/jefferis/natcpp
-BugReports: https://github.com/jefferis/natcpp/issues
