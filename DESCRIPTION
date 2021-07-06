@@ -2,8 +2,12 @@ Type: Package
 Package: natcpp
 Title: Fast C++ functions for computational neuroanatomy
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
+Authors@R: 
+    person(given = "Gregory",
+           family = "Jefferis",
+           role = c("aut", "cre"),
+           email = "jefferis@gmail.com",
+           comment = c(ORCID = "0000-0002-0587-9355"))
 Description: Fast functions implemented in C++ via Rcpp to support the
     neuroanatomy toolbox ('nat') ecosystem. These functions provide large
     speed-ups for basic manipulation of neuronal skeletons over pure R
@@ -22,4 +26,5 @@ LinkingTo:
     Rcpp
 Config/testthat/edition: 3
 Encoding: UTF-8
+Language: en-GB
 RoxygenNote: 7.1.1
