@@ -1,6 +1,13 @@
 #include <Rcpp.h>
 using namespace Rcpp;
 
+//' A simple function to compute the lengths of the elements of an R list
+//'
+//' @details This is equivalent to the \code{base::lengths} however it it much
+//' faster for long lists (and somewhat slower for short ones).
+//' @param L a list
+//' @return An integer vector containing the length of each element of \code{L}
+//' @export
 // [[Rcpp::export]]
 IntegerVector c_listlengths(const List &L) {
   IntegerVector lens(L.size());
@@ -12,6 +19,11 @@ IntegerVector c_listlengths(const List &L) {
   return lens;
 }
 
+//' Find the first and last element of a list
+//'
+//' @param L a list containing integer vectors
+//' @return An integer vector containing the length of each element of \code{L}
+//' @export
 // [[Rcpp::export]]
 IntegerMatrix c_topntail(const List &L) {
   IntegerMatrix m( 2 , L.length() );
@@ -26,6 +38,22 @@ IntegerMatrix c_topntail(const List &L) {
   return m;
 }
 
+//' Turn a segment list into an edgelist suitable for constructing an ngraph
+//' @details It is up to the caller to generate the seglist.
+//' Note that isolated points will be dropped since they have no edges.
+//' @param L a list containing integer vectors from \code{as.seglist}
+//' @return An integer matrix of
+//' @export
+//' @examples
+//'
+//' \dontrun{
+//' library(nat)
+//' # make a neuron with multiple subtrees
+//' n=prune_vertices(Cell07PNs[[1]], 48L)
+//' # Must use flatten=T if including all subtrees
+//' sl=as.seglist(n, all = TRUE, flatten = TRUE)
+//' c_EdgeListFromSegList(sl)
+//' }
 // [[Rcpp::export]]
 IntegerMatrix c_EdgeListFromSegList(const List &L) {
 

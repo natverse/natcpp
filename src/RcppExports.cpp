@@ -19,9 +19,9 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// c_total_cable_sl
-double c_total_cable_sl(const List& sl, const NumericVector& x, const NumericVector& y, const NumericVector& z);
-RcppExport SEXP _natcpp_c_total_cable_sl(SEXP slSEXP, SEXP xSEXP, SEXP ySEXP, SEXP zSEXP) {
+// c_total_cable
+double c_total_cable(const List& sl, const NumericVector& x, const NumericVector& y, const NumericVector& z);
+RcppExport SEXP _natcpp_c_total_cable(SEXP slSEXP, SEXP xSEXP, SEXP ySEXP, SEXP zSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -29,7 +29,7 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< const NumericVector& >::type x(xSEXP);
     Rcpp::traits::input_parameter< const NumericVector& >::type y(ySEXP);
     Rcpp::traits::input_parameter< const NumericVector& >::type z(zSEXP);
-    rcpp_result_gen = Rcpp::wrap(c_total_cable_sl(sl, x, y, z));
+    rcpp_result_gen = Rcpp::wrap(c_total_cable(sl, x, y, z));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -69,7 +69,7 @@ END_RCPP
 
 static const R_CallMethodDef CallEntries[] = {
     {"_natcpp_c_seglengths", (DL_FUNC) &_natcpp_c_seglengths, 4},
-    {"_natcpp_c_total_cable_sl", (DL_FUNC) &_natcpp_c_total_cable_sl, 4},
+    {"_natcpp_c_total_cable", (DL_FUNC) &_natcpp_c_total_cable, 4},
     {"_natcpp_c_listlengths", (DL_FUNC) &_natcpp_c_listlengths, 1},
     {"_natcpp_c_topntail", (DL_FUNC) &_natcpp_c_topntail, 1},
     {"_natcpp_c_EdgeListFromSegList", (DL_FUNC) &_natcpp_c_EdgeListFromSegList, 1},
