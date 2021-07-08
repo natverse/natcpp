@@ -2,7 +2,7 @@
 # natcpp
 
 <!-- badges: start -->
-[![natverse](https://img.shields.io/badge/natverse-Part%20of%20the%20natverse-a241b6)](https://natverse.github.io)
+[![natverse](https://img.shields.io/badge/natverse-Part%20of%20the%20natverse-a241b6)](https://natverse.org)
 [![Docs](https://img.shields.io/badge/docs-100%25-brightgreen.svg)](https://jefferis.github.io/natcpp/reference/)
 [![R-CMD-check](https://github.com/jefferis/natcpp/workflows/R-CMD-check/badge.svg)](https://github.com/jefferis/natcpp/actions)
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
@@ -11,7 +11,7 @@
 The goal of *natcpp* is to provide accelerated routines through compiled C++ 
 code for basic functions to support the [natverse](https://natverse.org) ecosystem.
 *natcpp* is not designed to be used by end users but instead the 
-[nat](https://natverse.org/nat) package will use it when available to enable
+[nat](https://natverse.org/nat/) package will use it when available to enable
 large speed-ups for some primitive operations. End users should therefore not count on the  *natcpp* functions/interface being stable, especially during its
 initial development.
 
