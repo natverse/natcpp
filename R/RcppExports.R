@@ -15,6 +15,7 @@ c_seglengths <- function(sl, x, y, z) {
 #' @description \code{c_total_cable} computes the summed total cable for a
 #' whole neuron. It's intended use is the \code{nat::summary.neuron} function.
 #' @rdname c_seglengths
+#' @export
 c_total_cable <- function(sl, x, y, z) {
     .Call(`_natcpp_c_total_cable`, sl, x, y, z)
 }

@@ -35,6 +35,7 @@ NumericVector c_seglengths(const List &sl, const NumericVector &x,
 //' @description \code{c_total_cable} computes the summed total cable for a
 //' whole neuron. It's intended use is the \code{nat::summary.neuron} function.
 //' @rdname c_seglengths
+//' @export
 // [[Rcpp::export]]
 double c_total_cable(const List &sl, const NumericVector &x,
                         const NumericVector &y, const NumericVector &z) {
