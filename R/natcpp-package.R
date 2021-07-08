@@ -1,4 +1,5 @@
 #' @keywords internal
+#' @import Rcpp
 #' @useDynLib natcpp, .registration = TRUE
 "_PACKAGE"
 
