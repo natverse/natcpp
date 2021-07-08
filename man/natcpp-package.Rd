@@ -6,7 +6,7 @@
 \alias{natcpp-package}
 \title{natcpp: Fast C++ Functions for Computational Neuroanatomy}
 \description{
-Fast functions implemented in C++ via Rcpp to support the
+Fast functions implemented in C++ via 'Rcpp' to support the
     neuroanatomy toolbox ('nat') ecosystem. These functions provide large
     speed-ups for basic manipulation of neuronal skeletons over pure R
     functions found in the 'nat' package. The expectation is that end
