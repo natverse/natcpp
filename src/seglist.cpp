@@ -19,6 +19,18 @@ IntegerVector c_listlengths(const List &L) {
   return lens;
 }
 
+// Check that we really have an integer vector inside our seglist
+// and cast if necessary
+IntegerVector check_segvec(const SEXP &x) {
+  switch(TYPEOF(x)) {
+  case REALSXP:
+  case INTSXP:
+    return as<IntegerVector>(x);
+    break;
+  }
+  stop("seglist must contain integer (or numeric) vectors!");
+}
+
 //' Find the first and last element of a list
 //'
 //' @param L a list containing integer vectors
@@ -29,14 +41,7 @@ IntegerMatrix c_topntail(const List &L) {
   IntegerMatrix m( 2 , L.length() );
 
   for (int i=0; i<L.size(); i++) {
-    Rcpp::IntegerVector V;
-    switch(TYPEOF(L[i])) {
-    case REALSXP:
-    case INTSXP:
-      V=as<IntegerVector>(L[i]);
-      break;
-      stop("seglist must contain integer (or numeric) vectors!");
-    }
+    const IntegerVector V=check_segvec(L[i]);
     if(V.length()<1)
       continue;
     m(0,i)=V[0];
@@ -74,18 +79,7 @@ IntegerMatrix c_EdgeListFromSegList(const List &L) {
   int nelems=0;
 
   for (int i=0; i<L.size(); i++) {
-    Rcpp::IntegerVector V;
-    switch(TYPEOF(L[i])) {
-    case REALSXP:
-      // thought about warning, but this will cause test issues
-      // and these are only found in old test data ...
-      // warning("converting seglist from numeric to integer!");
-    case INTSXP:
-      V=as<IntegerVector>(L[i]);
-      break;
-      stop("seglist must contain integer (or numeric) vectors!");
-    }
-
+    const IntegerVector V = check_segvec(L[i]);
     int nv=V.length();
     if(nv>1) {
       for(int j=0;j<(nv-1);j++) {
