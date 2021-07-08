@@ -29,7 +29,14 @@ IntegerMatrix c_topntail(const List &L) {
   IntegerMatrix m( 2 , L.length() );
 
   for (int i=0; i<L.size(); i++) {
-    Rcpp::IntegerVector V = L[i];
+    Rcpp::IntegerVector V;
+    switch(TYPEOF(L[i])) {
+    case REALSXP:
+    case INTSXP:
+      V=as<IntegerVector>(L[i]);
+      break;
+      stop("seglist must contain integer (or numeric) vectors!");
+    }
     if(V.length()<1)
       continue;
     m(0,i)=V[0];

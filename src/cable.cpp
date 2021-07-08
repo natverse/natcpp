@@ -14,7 +14,16 @@ NumericVector c_seglengths(const List &sl, const NumericVector &x,
   NumericVector lens(sl.size());
   for (int i=0; i<sl.size(); i++) {
     // nb must decrement by 1 for C style indices
-    const Rcpp::IntegerVector idxs = sl[i];
+
+    Rcpp::IntegerVector idxs;
+    switch(TYPEOF(sl[i])) {
+    case REALSXP:
+    case INTSXP:
+      idxs=as<IntegerVector>(sl[i]);
+      break;
+      stop("seglist must contain integer (or numeric) vectors!");
+    }
+
     const int nv=idxs.length();
 
     double sd=0.0;
