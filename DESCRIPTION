@@ -1,6 +1,6 @@
 Type: Package
 Package: natcpp
-Title: Fast C++ functions for computational neuroanatomy
+Title: Fast C++ Functions for Computational Neuroanatomy
 Version: 0.1.0
 Authors@R: 
     person(given = "Gregory",
