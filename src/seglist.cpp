@@ -18,10 +18,15 @@ IntegerVector c_listlengths(const List &L) {
   return lens;
 }
 
-//' Find the first and last element of a list
+//' Find the first and last elements of all vectors in a list
 //'
-//' @param L a list containing integer vectors
-//' @return An integer vector containing the length of each element of \code{L}
+//' @description \code{c_topntail} returns an Nx2 matrix containing the start and end
+//' of each of the vectors in the input list. Length 0 vectors are ignored, while
+//' length 1 vectors are duplicated
+//'
+//' @param L a list containing integer vectors, typically a \code{seglist}
+//' @return For \code{c_topntail} an integer \code{matrix}. For \code{c_topntail_list}
+//'   a \code{list}.
 //' @export
 // [[Rcpp::export]]
 IntegerMatrix c_topntail(const List &L) {
@@ -36,6 +41,27 @@ IntegerMatrix c_topntail(const List &L) {
   }
   return m;
 }
+
+//' @description For \code{c_topntail_list}, a list of the same length as
+//' \code{L} having the same elements when their length is <=2 or
+//' the first and last elements when length>2.
+//' @export
+//' @rdname c_topntail
+// [[Rcpp::export]]
+List c_topntail_list(const List &L) {
+  List T(L.size());
+
+  for (int i=0; i<L.size(); i++) {
+    if(Rf_length(L[i])<=2)
+      T(i)=L[i];
+    else {
+      const IntegerVector V=check_segvec(L[i]);
+      T(i)=IntegerVector::create(V[0], V[V.length()-1]);
+    }
+  }
+  return T;
+}
+
 
 //' Turn a segment list into an edgelist suitable for constructing an ngraph
 //' @details It is up to the caller to generate the \code{seglist}.

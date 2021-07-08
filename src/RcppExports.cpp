@@ -60,6 +60,17 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// c_topntail_list
+List c_topntail_list(const List& L);
+RcppExport SEXP _natcpp_c_topntail_list(SEXP LSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const List& >::type L(LSEXP);
+    rcpp_result_gen = Rcpp::wrap(c_topntail_list(L));
+    return rcpp_result_gen;
+END_RCPP
+}
 // c_EdgeListFromSegList
 IntegerMatrix c_EdgeListFromSegList(const List& L);
 RcppExport SEXP _natcpp_c_EdgeListFromSegList(SEXP LSEXP) {
@@ -77,6 +88,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_natcpp_c_total_cable", (DL_FUNC) &_natcpp_c_total_cable, 4},
     {"_natcpp_c_listlengths", (DL_FUNC) &_natcpp_c_listlengths, 1},
     {"_natcpp_c_topntail", (DL_FUNC) &_natcpp_c_topntail, 1},
+    {"_natcpp_c_topntail_list", (DL_FUNC) &_natcpp_c_topntail_list, 1},
     {"_natcpp_c_EdgeListFromSegList", (DL_FUNC) &_natcpp_c_EdgeListFromSegList, 1},
     {NULL, NULL, 0}
 };

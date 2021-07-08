@@ -31,13 +31,27 @@ c_listlengths <- function(L) {
     .Call(`_natcpp_c_listlengths`, L)
 }
 
-#' Find the first and last element of a list
+#' Find the first and last elements of all vectors in a list
 #'
-#' @param L a list containing integer vectors
-#' @return An integer vector containing the length of each element of \code{L}
+#' @description \code{c_topntail} returns an Nx2 matrix containing the start and end
+#' of each of the vectors in the input list. Length 0 vectors are ignored, while
+#' length 1 vectors are duplicated
+#'
+#' @param L a list containing integer vectors, typically a \code{seglist}
+#' @return For \code{c_topntail} an integer \code{matrix}. For \code{c_topntail_list}
+#'   a \code{list}.
 #' @export
 c_topntail <- function(L) {
     .Call(`_natcpp_c_topntail`, L)
+}
+
+#' @description For \code{c_topntail_list}, a list of the same length as
+#' \code{L} having the same elements when their length is <=2 or
+#' the first and last elements when length>2.
+#' @export
+#' @rdname c_topntail
+c_topntail_list <- function(L) {
+    .Call(`_natcpp_c_topntail_list`, L)
 }
 
 #' Turn a segment list into an edgelist suitable for constructing an ngraph

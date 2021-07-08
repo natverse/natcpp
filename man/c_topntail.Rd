@@ -2,16 +2,26 @@
 % Please edit documentation in R/RcppExports.R
 \name{c_topntail}
 \alias{c_topntail}
-\title{Find the first and last element of a list}
+\alias{c_topntail_list}
+\title{Find the first and last elements of all vectors in a list}
 \usage{
 c_topntail(L)
+
+c_topntail_list(L)
 }
 \arguments{
-\item{L}{a list containing integer vectors}
+\item{L}{a list containing integer vectors, typically a \code{seglist}}
 }
 \value{
-An integer vector containing the length of each element of \code{L}
+For \code{c_topntail} an integer \code{matrix}. For \code{c_topntail_list}
+  a \code{list}.
 }
 \description{
-Find the first and last element of a list
+\code{c_topntail} returns an Nx2 matrix containing the start and end
+of each of the vectors in the input list. Length 0 vectors are ignored, while
+length 1 vectors are duplicated
+
+For \code{c_topntail_list}, a list of the same length as
+\code{L} having the same elements when their length is <=2 or
+the first and last elements when length>2.
 }
