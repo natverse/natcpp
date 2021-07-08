@@ -2,7 +2,7 @@
 # Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 #' Compute summed segment lengths or total cable
-#' @description \code{c_seglengths} comutes the summed segment length equivalent
+#' @description \code{c_seglengths} computes the summed segment length equivalent
 #'  to \code{nat::seglengths(sumsegment = T)}
 #' @param sl A \code{seglist} with 1-indices into vectors x,y,z
 #' @param x,y,z Numeric vectors with 3D coordinate data
@@ -40,10 +40,10 @@ c_topntail <- function(L) {
 }
 
 #' Turn a segment list into an edgelist suitable for constructing an ngraph
-#' @details It is up to the caller to generate the seglist.
+#' @details It is up to the caller to generate the \code{seglist}.
 #' Note that isolated points will be dropped since they have no edges.
 #' @param L a list containing integer vectors from \code{as.seglist}
-#' @return An integer matrix of
+#' @return An integer matrix of N rows and 2 columns
 #' @export
 #' @examples
 #'

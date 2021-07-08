@@ -10,13 +10,13 @@ c_EdgeListFromSegList(L)
 \item{L}{a list containing integer vectors from \code{as.seglist}}
 }
 \value{
-An integer matrix of
+An integer matrix of N rows and 2 columns
 }
 \description{
 Turn a segment list into an edgelist suitable for constructing an ngraph
 }
 \details{
-It is up to the caller to generate the seglist.
+It is up to the caller to generate the \code{seglist}.
 Note that isolated points will be dropped since they have no edges.
 }
 \examples{

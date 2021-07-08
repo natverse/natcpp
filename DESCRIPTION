@@ -21,6 +21,7 @@ BugReports: https://github.com/jefferis/natcpp/issues
 Imports: 
     Rcpp (>= 1.0.6)
 Suggests: 
+    spelling,
     testthat (>= 3.0.0)
 LinkingTo: 
     Rcpp

@@ -16,7 +16,7 @@ c_total_cable(sl, x, y, z)
 (which could be columns from a data frame)}
 }
 \description{
-\code{c_seglengths} comutes the summed segment length equivalent
+\code{c_seglengths} computes the summed segment length equivalent
  to \code{nat::seglengths(sumsegment = T)}
 
 \code{c_total_cable} computes the summed total cable for a

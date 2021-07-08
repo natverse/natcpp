@@ -1,7 +1,7 @@
 #include "natcpp.h"
 
 //' Compute summed segment lengths or total cable
-//' @description \code{c_seglengths} comutes the summed segment length equivalent
+//' @description \code{c_seglengths} computes the summed segment length equivalent
 //'  to \code{nat::seglengths(sumsegment = T)}
 //' @param sl A \code{seglist} with 1-indices into vectors x,y,z
 //' @param x,y,z Numeric vectors with 3D coordinate data
