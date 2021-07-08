@@ -1,5 +1,4 @@
-#include <Rcpp.h>
-using namespace Rcpp;
+#include "natcpp.h"
 
 //' Compute summed segment lengths or total cable
 //' @description \code{c_seglengths} comutes the summed segment length equivalent
@@ -14,16 +13,7 @@ NumericVector c_seglengths(const List &sl, const NumericVector &x,
   NumericVector lens(sl.size());
   for (int i=0; i<sl.size(); i++) {
     // nb must decrement by 1 for C style indices
-
-    Rcpp::IntegerVector idxs;
-    switch(TYPEOF(sl[i])) {
-    case REALSXP:
-    case INTSXP:
-      idxs=as<IntegerVector>(sl[i]);
-      break;
-      stop("seglist must contain integer (or numeric) vectors!");
-    }
-
+    const IntegerVector idxs = check_segvec(sl[i]);
     const int nv=idxs.length();
 
     double sd=0.0;

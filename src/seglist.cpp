@@ -1,5 +1,4 @@
-#include <Rcpp.h>
-using namespace Rcpp;
+#include "natcpp.h"
 
 //' A simple function to compute the lengths of the elements of an R list
 //'
@@ -17,18 +16,6 @@ IntegerVector c_listlengths(const List &L) {
     lens[i] = Rf_length(x);
   }
   return lens;
-}
-
-// Check that we really have an integer vector inside our seglist
-// and cast if necessary
-IntegerVector check_segvec(const SEXP &x) {
-  switch(TYPEOF(x)) {
-  case REALSXP:
-  case INTSXP:
-    return as<IntegerVector>(x);
-    break;
-  }
-  stop("seglist must contain integer (or numeric) vectors!");
 }
 
 //' Find the first and last element of a list
