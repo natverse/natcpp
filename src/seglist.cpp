@@ -67,7 +67,18 @@ IntegerMatrix c_EdgeListFromSegList(const List &L) {
   int nelems=0;
 
   for (int i=0; i<L.size(); i++) {
-    Rcpp::IntegerVector V = L[i];
+    Rcpp::IntegerVector V;
+    switch(TYPEOF(L[i])) {
+    case REALSXP:
+      // thought about warning, but this will cause test issues
+      // and these are only found in old test data ...
+      // warning("converting seglist from numeric to integer!");
+    case INTSXP:
+      V=as<IntegerVector>(L[i]);
+      break;
+      stop("seglist must contain integer (or numeric) vectors!");
+    }
+
     int nv=V.length();
     if(nv>1) {
       for(int j=0;j<(nv-1);j++) {

@@ -5,6 +5,11 @@
 
 using namespace Rcpp;
 
+#ifdef RCPP_USE_GLOBAL_ROSTREAM
+Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
+Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
+#endif
+
 // c_seglengths
 NumericVector c_seglengths(const List& sl, const NumericVector& x, const NumericVector& y, const NumericVector& z);
 RcppExport SEXP _natcpp_c_seglengths(SEXP slSEXP, SEXP xSEXP, SEXP ySEXP, SEXP zSEXP) {
