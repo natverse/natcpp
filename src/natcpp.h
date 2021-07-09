@@ -5,8 +5,10 @@ using namespace Rcpp;
 // and cast if necessary
 inline IntegerVector check_segvec(const SEXP &x) {
   switch(TYPEOF(x)) {
-  case REALSXP:
   case INTSXP:
+    return IntegerVector(x);
+    break;
+  case REALSXP:
     return as<IntegerVector>(x);
     break;
   }
