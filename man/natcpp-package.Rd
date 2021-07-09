@@ -17,8 +17,8 @@ Fast functions implemented in C++ via 'Rcpp' to support the
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://github.com/jefferis/natcpp}
-  \item Report bugs at \url{https://github.com/jefferis/natcpp/issues}
+  \item \url{https://github.com/natverse/natcpp}
+  \item Report bugs at \url{https://github.com/natverse/natcpp/issues}
 }
 
 }

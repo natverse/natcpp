@@ -3,8 +3,8 @@
 
 <!-- badges: start -->
 [![natverse](https://img.shields.io/badge/natverse-Part%20of%20the%20natverse-a241b6)](https://natverse.org)
-[![Docs](https://img.shields.io/badge/docs-100%25-brightgreen.svg)](https://jefferis.github.io/natcpp/reference/)
-[![R-CMD-check](https://github.com/jefferis/natcpp/workflows/R-CMD-check/badge.svg)](https://github.com/jefferis/natcpp/actions)
+[![Docs](https://img.shields.io/badge/docs-100%25-brightgreen.svg)](https://natverse.github.io/natcpp/reference/)
+[![R-CMD-check](https://github.com/natverse/natcpp/workflows/R-CMD-check/badge.svg)](https://github.com/natverse/natcpp/actions)
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 <!-- badges: end -->
 
@@ -35,7 +35,7 @@ For now please do:
 
 ``` r
 install.packages("natmanager")
-natmanager::install(pkgs = 'jefferis/natcpp')
+natmanager::install(pkgs = 'natverse/natcpp')
 ```
 
 
