@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Find the first and last element of a list — c_topntail • natcpp</title>
+<title>Find the first and last elements of all vectors in a list — c_topntail • natcpp</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,13 @@
 
 
 
-<meta property="og:title" content="Find the first and last element of a list — c_topntail" />
-<meta property="og:description" content="Find the first and last element of a list" />
+<meta property="og:title" content="Find the first and last elements of all vectors in a list — c_topntail" />
+<meta property="og:description" content="c_topntail returns an Nx2 matrix containing the start and end
+of each of the vectors in the input list. Length 0 vectors are ignored, while
+length 1 vectors are duplicated
+For c_topntail_list, a list of the same length as
+L having the same elements when their length is &amp;lt;=2 or
+the first and last elements when length&amp;gt;2." />
 
 
 
@@ -114,29 +119,37 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Find the first and last element of a list</h1>
+    <h1>Find the first and last elements of all vectors in a list</h1>
     <small class="dont-index">Source: <a href='https://github.com/jefferis/natcpp/blob/master/R/RcppExports.R'><code>R/RcppExports.R</code></a></small>
     <div class="hidden name"><code>c_topntail.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Find the first and last element of a list</p>
+    <p><code>c_topntail</code> returns an Nx2 matrix containing the start and end
+of each of the vectors in the input list. Length 0 vectors are ignored, while
+length 1 vectors are duplicated</p>
+<p>For <code>c_topntail_list</code>, a list of the same length as
+<code>L</code> having the same elements when their length is &lt;=2 or
+the first and last elements when length&gt;2.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>c_topntail</span><span class='op'>(</span><span class='va'>L</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>c_topntail</span><span class='op'>(</span><span class='va'>L</span><span class='op'>)</span>
+
+<span class='fu'>c_topntail_list</span><span class='op'>(</span><span class='va'>L</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>L</th>
-      <td><p>a list containing integer vectors</p></td>
+      <td><p>a list containing integer vectors, typically a <code>seglist</code></p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>An integer vector containing the length of each element of <code>L</code></p>
+    <p>For <code>c_topntail</code> an integer <code>matrix</code>. For <code>c_topntail_list</code>
+  a <code>list</code>.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
