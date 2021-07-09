@@ -1,6 +1,6 @@
 Type: Package
 Package: natcpp
-Title: Fast C++ Functions for Computational Neuroanatomy
+Title: Fast C++ Primitives for the NeuroAnatomy Toolbox (nat)
 Version: 0.1.0
 Authors@R: 
     person(given = "Gregory",
@@ -9,7 +9,7 @@ Authors@R:
            email = "jefferis@gmail.com",
            comment = c(ORCID = "0000-0002-0587-9355"))
 Description: Fast functions implemented in C++ via 'Rcpp' to support the
-    neuroanatomy toolbox ('nat') ecosystem. These functions provide large
+    'NeuroAnatomy Toolbox' ('nat') ecosystem. These functions provide large
     speed-ups for basic manipulation of neuronal skeletons over pure R
     functions found in the 'nat' package. The expectation is that end
     users will not use this package directly, but instead the 'nat'
