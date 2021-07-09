@@ -4,7 +4,7 @@
 \name{natcpp-package}
 \alias{natcpp}
 \alias{natcpp-package}
-\title{natcpp: Fast C++ Computational Neuroanatomy Primitives to Support 'nat'}
+\title{natcpp: Fast C++ Primitives for the 'NeuroAnatomy Toolbox'}
 \description{
 Fast functions implemented in C++ via 'Rcpp' to support the
     'NeuroAnatomy Toolbox' ('nat') ecosystem. These functions provide large
