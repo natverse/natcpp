@@ -6,3 +6,4 @@
 ^pkgdown$
 ^LICENSE\.md$
 ^spare$
+^cran-comments\.md$
