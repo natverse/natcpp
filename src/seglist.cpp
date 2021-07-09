@@ -20,7 +20,7 @@ IntegerVector c_listlengths(const List &L) {
 
 //' Find the first and last elements of all vectors in a list
 //'
-//' @description \code{c_topntail} returns an Nx2 matrix containing the start and end
+//' @description \code{c_topntail} returns an 2xN matrix containing the start and end
 //' of each of the vectors in the input list. Length 0 vectors are ignored, while
 //' length 1 vectors are duplicated
 //'

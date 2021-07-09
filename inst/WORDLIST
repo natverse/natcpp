@@ -1,6 +1,5 @@
 CMD
 Lifecycle
-Nx
 ORCID
 Rcpp
 edgelist
@@ -8,3 +7,4 @@ github
 nat
 natverse
 ngraph
+xN

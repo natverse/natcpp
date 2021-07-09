@@ -17,7 +17,7 @@ For \code{c_topntail} an integer \code{matrix}. For \code{c_topntail_list}
   a \code{list}.
 }
 \description{
-\code{c_topntail} returns an Nx2 matrix containing the start and end
+\code{c_topntail} returns an 2xN matrix containing the start and end
 of each of the vectors in the input list. Length 0 vectors are ignored, while
 length 1 vectors are duplicated
 
