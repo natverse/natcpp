@@ -5,15 +5,15 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Fast C++ Functions for Computational Neuroanatomy • natcpp</title>
+<title>Fast C++ Primitives for the NeuroAnatomy Toolbox • natcpp</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="bootstrap-toc.css">
 <script src="bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
-<script src="pkgdown.js"></script><meta property="og:title" content="Fast C++ Functions for Computational Neuroanatomy">
+<script src="pkgdown.js"></script><meta property="og:title" content="Fast C++ Primitives for the NeuroAnatomy Toolbox">
 <meta property="og:description" content="Fast functions implemented in C++ via Rcpp to support the
-    neuroanatomy toolbox (nat) ecosystem. These functions provide large
+    NeuroAnatomy Toolbox (nat) ecosystem. These functions provide large
     speed-ups for basic manipulation of neuronal skeletons over pure R
     functions found in the nat package. The expectation is that end
     users will not use this package directly, but instead the nat
@@ -61,7 +61,7 @@
   <a href="https://natverse.github.io">natverse</a>
 </li>
 <li>
-  <a href="https://github.com/jefferis/natcpp/">
+  <a href="https://github.com/natverse/natcpp/">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -94,7 +94,7 @@
 <p>For now please do:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"natmanager"</span><span class="op">)</span>
-<span class="fu">natmanager</span><span class="fu">::</span><span class="fu">install</span><span class="op">(</span>pkgs <span class="op">=</span> <span class="st">'jefferis/natcpp'</span><span class="op">)</span></code></pre></div>
+<span class="fu">natmanager</span><span class="fu">::</span><span class="fu">install</span><span class="op">(</span>pkgs <span class="op">=</span> <span class="st">'natverse/natcpp'</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="example" class="section level2">
 <h2 class="hasAnchor">
@@ -102,7 +102,7 @@
 <p>As already noted, the intention is that end users will only use the nat package (and that will automagically use natcpp when available). However to prove that everything is set up properly, you could do:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">nat</span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jefferis/natcpp">natcpp</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/natverse/natcpp">natcpp</a></span><span class="op">)</span>
 <span class="fu">topntail</span><span class="op">(</span><span class="fu">as.seglist</span><span class="op">(</span><span class="va">Cell07PNs</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>.</p>
 </div>
@@ -113,9 +113,9 @@
     <div class="links">
 <h2>Links</h2>
 <ul class="list-unstyled">
-<li>Browse source code at <br><a href="https://github.com/jefferis/natcpp/">https://​github.com/​jefferis/​natcpp/​</a>
+<li>Browse source code at <br><a href="https://github.com/natverse/natcpp/">https://​github.com/​natverse/​natcpp/​</a>
 </li>
-<li>Report a bug at <br><a href="https://github.com/jefferis/natcpp/issues">https://​github.com/​jefferis/​natcpp/​issues</a>
+<li>Report a bug at <br><a href="https://github.com/natverse/natcpp/issues">https://​github.com/​natverse/​natcpp/​issues</a>
 </li>
 </ul>
 </div>
@@ -137,8 +137,8 @@
 <h2>Dev status</h2>
 <ul class="list-unstyled">
 <li><a href="https://natverse.org"><img src="https://img.shields.io/badge/natverse-Part%20of%20the%20natverse-a241b6" alt="natverse"></a></li>
-<li><a href="https://jefferis.github.io/natcpp/reference/"><img src="https://img.shields.io/badge/docs-100%25-brightgreen.svg" alt="Docs"></a></li>
-<li><a href="https://github.com/jefferis/natcpp/actions"><img src="https://github.com/jefferis/natcpp/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
+<li><a href="https://natverse.github.io/natcpp/reference/"><img src="https://img.shields.io/badge/docs-100%25-brightgreen.svg" alt="Docs"></a></li>
+<li><a href="https://github.com/natverse/natcpp/actions"><img src="https://github.com/natverse/natcpp/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
 <li><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a></li>
 </ul>
 </div>
