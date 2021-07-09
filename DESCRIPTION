@@ -1,6 +1,6 @@
 Type: Package
 Package: natcpp
-Title: Fast C++ Primitives for the NeuroAnatomy Toolbox (nat)
+Title: Fast C++ Computational Neuroanatomy Primitives to Support 'nat'
 Version: 0.1.0
 Authors@R: 
     person(given = "Gregory",
