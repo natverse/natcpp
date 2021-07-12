@@ -9,12 +9,8 @@
 
 ## R CMD check results
 
-https://win-builder.r-project.org/mOt7FOK9PKie/
+https://win-builder.r-project.org/St5za8G63m50/
 
 0 errors | 0 warnings | 1 note
 
-* This is a new release.
-* Possibly mis-spelled words in DESCRIPTION:
-  Neuroanatomy (3:31)
-
-Neuroanatomy is correctly spelled.
+* New submission
