@@ -1,7 +1,7 @@
 Type: Package
 Package: natcpp
 Title: Fast C++ Primitives for the 'NeuroAnatomy Toolbox'
-Version: 0.1.0
+Version: 0.1.0.9000
 Authors@R: 
     person(given = "Gregory",
            family = "Jefferis",
