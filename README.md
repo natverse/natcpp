@@ -6,6 +6,7 @@
 [![Docs](https://img.shields.io/badge/docs-100%25-brightgreen.svg)](https://natverse.org/natcpp/reference/)
 [![R-CMD-check](https://github.com/natverse/natcpp/workflows/R-CMD-check/badge.svg)](https://github.com/natverse/natcpp/actions)
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+[![CRAN status](https://www.r-pkg.org/badges/version/natcpp)](https://CRAN.R-project.org/package=natcpp)
 <!-- badges: end -->
 
 The goal of *natcpp* is to provide accelerated routines through compiled C++ 
@@ -25,13 +26,13 @@ intervenes.
 
 ## Installation
 
-You will be able to install the released version of natcpp from [CRAN](https://CRAN.R-project.org) with:
+Install the released version of natcpp from [CRAN](https://CRAN.R-project.org) with:
 
 ``` r
 install.packages("natcpp")
 ```
 
-For now please do:
+For the development version, please do:
 
 ``` r
 install.packages("natmanager")
