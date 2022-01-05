@@ -24,8 +24,10 @@ c_total_cable <- function(sl, x, y, z) {
 #'
 #' @details Typically this will be for 3D coordinates but there are no limits
 #'   on row length.
-#' @param object An integer or numeric matrix of N rows and M columns
-#' @return a list containing N integer or numeric vectors of length M
+#' @param object An integer, numeric, character or logical matrix of N rows and
+#'   M columns
+#' @return a list containing N vectors of length M corresponding to the rows of
+#'   \code{object}.
 #' @export
 #' @examples
 #' \dontrun{

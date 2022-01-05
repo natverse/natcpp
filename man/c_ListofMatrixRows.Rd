@@ -7,10 +7,12 @@
 c_ListofMatrixRows(object)
 }
 \arguments{
-\item{object}{An integer or numeric matrix of N rows and M columns}
+\item{object}{An integer, numeric, character or logical matrix of N rows and
+M columns}
 }
 \value{
-a list containing N integer or numeric vectors of length M
+a list containing N vectors of length M corresponding to the rows of
+  \code{object}.
 }
 \description{
 Convert a matrix into list of row vectors
