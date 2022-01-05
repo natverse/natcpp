@@ -20,6 +20,30 @@ c_total_cable <- function(sl, x, y, z) {
     .Call(`_natcpp_c_total_cable`, sl, x, y, z)
 }
 
+#' Convert a matrix into list of row vectors
+#'
+#' @details Typically this will be for 3D coordinates but there are no limits
+#'   on row length.
+#' @param object An integer, numeric, character or logical matrix of N rows and
+#'   M columns
+#' @return a list containing N vectors of length M corresponding to the rows of
+#'   \code{object}.
+#' @export
+#' @examples
+#' \dontrun{
+#' library(nat)
+#' xyz=xyzmatrix(Cell07PNs)
+#' mat2list = function(m) {
+#' um=unname(m)
+#' lapply(1:nrow(um), function(i) um[i,])
+#' }
+#' bench::mark(rcpp=c_ListofMatrixRows(xyz), r=mat2list(xyz))
+#' }
+#' @export
+c_ListofMatrixRows <- function(object) {
+    .Call(`_natcpp_c_ListofMatrixRows`, object)
+}
+
 #' A simple function to compute the lengths of the elements of an R list
 #'
 #' @details This is equivalent to the \code{base::lengths} however it it much

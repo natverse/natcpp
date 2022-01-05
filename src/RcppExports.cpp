@@ -38,6 +38,17 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// c_ListofMatrixRows
+List c_ListofMatrixRows(const SEXP& object);
+RcppExport SEXP _natcpp_c_ListofMatrixRows(SEXP objectSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const SEXP& >::type object(objectSEXP);
+    rcpp_result_gen = Rcpp::wrap(c_ListofMatrixRows(object));
+    return rcpp_result_gen;
+END_RCPP
+}
 // c_listlengths
 IntegerVector c_listlengths(const List& L);
 RcppExport SEXP _natcpp_c_listlengths(SEXP LSEXP) {
@@ -86,6 +97,7 @@ END_RCPP
 static const R_CallMethodDef CallEntries[] = {
     {"_natcpp_c_seglengths", (DL_FUNC) &_natcpp_c_seglengths, 4},
     {"_natcpp_c_total_cable", (DL_FUNC) &_natcpp_c_total_cable, 4},
+    {"_natcpp_c_ListofMatrixRows", (DL_FUNC) &_natcpp_c_ListofMatrixRows, 1},
     {"_natcpp_c_listlengths", (DL_FUNC) &_natcpp_c_listlengths, 1},
     {"_natcpp_c_topntail", (DL_FUNC) &_natcpp_c_topntail, 1},
     {"_natcpp_c_topntail_list", (DL_FUNC) &_natcpp_c_topntail_list, 1},
