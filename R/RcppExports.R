@@ -20,6 +20,43 @@ c_total_cable <- function(sl, x, y, z) {
     .Call(`_natcpp_c_total_cable`, sl, x, y, z)
 }
 
+#' Convert physical coordinates to pixel coordinates
+#'
+#' @param xyz Nx3 matrix of physical coordinates
+#' @param dims Integer dimensions of the 3d image array
+#' @param origin Numeric: 3d coordinates of the origin
+#' @param voxdims Numeric: 3 numbers describing the voxel dimensions
+#' @param clamp Logical: whether or not to clamp values within the pixel
+#'   boundaries of the image.
+#' @return Nx3 integer matrix of pixel coordinates
+#' @export
+c_ijkpos <- function(xyz, origin, voxdims, dims, clamp = FALSE) {
+    .Call(`_natcpp_c_ijkpos`, xyz, origin, voxdims, dims, clamp)
+}
+
+#' Find 1D index given n-dimensional indices
+#' @param dims Integer dimensions of the array (usually 3d)
+#' @param indices Nx3 integer matrix of pixel coordinates
+#' @return numeric vector of linear indices into the array
+#' @export
+c_sub2ind <- function(dims, indices) {
+    .Call(`_natcpp_c_sub2ind`, dims, indices)
+}
+
+#' Convert physical coordinates to 1d indices into image array
+#'
+#' @param xyz Nx3 matrix or data.frame of physical coordinates
+#' @param dims Integer dimensions of the 3d image array
+#' @param origin Numeric: 3d coordinates of the origin
+#' @param voxdims Numeric: 3 numbers describing the voxel dimensions
+#' @param clamp Logical: whether or not to clamp values within the pixel
+#'   boundaries of the image.
+#' @return Nx3 integer matrix of pixel coordinates
+#' @export
+c_coords21dindex <- function(xyz, origin, voxdims, dims, clamp = FALSE) {
+    .Call(`_natcpp_c_coords21dindex`, xyz, origin, voxdims, dims, clamp)
+}
+
 #' Convert a matrix into list of row vectors
 #'
 #' @details Typically this will be for 3D coordinates but there are no limits
