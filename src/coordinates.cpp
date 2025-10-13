@@ -109,13 +109,9 @@ IntegerMatrix c_ijkpos(SEXP xyz,
   }
 }
 
-//' Find 1D index given n-dimensional indices
-//' @param dims Integer dimensions of the array (usually 3d)
-//' @param indices Nx3 integer matrix of pixel coordinates
-//' @return numeric vector of linear indices into the array
-//' @export
-// [[Rcpp::export]]
-NumericVector c_sub2ind(IntegerVector dims, NumericMatrix indices) {
+
+template <typename T>
+NumericVector sub2ind_core(IntegerVector dims, const T& indices) {
   int n = indices.nrow();
   int d = indices.ncol();
 
@@ -143,6 +139,19 @@ NumericVector c_sub2ind(IntegerVector dims, NumericMatrix indices) {
   return ndx;
 }
 
+//' Find 1D index given n-dimensional indices
+//' @param dims Integer dimensions of the array (usually 3d)
+//' @param indices Nx3 integer matrix of pixel coordinates
+//' @return numeric vector of linear indices into the array
+//' @export
+// [[Rcpp::export]]
+NumericVector c_sub2ind(IntegerVector dims, IntegerMatrix indices) {
+  return sub2ind_core(dims, indices);
+}
+
+NumericVector c_sub2ind(IntegerVector dims, NumericMatrix indices) {
+  return sub2ind_core(dims, indices);
+}
 
 template <typename coords>
 NumericVector coords21dindex_core(const PtAccessor<coords>& xyz,

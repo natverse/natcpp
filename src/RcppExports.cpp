@@ -54,19 +54,19 @@ BEGIN_RCPP
 END_RCPP
 }
 // c_sub2ind
-NumericVector c_sub2ind(NumericVector dims, NumericMatrix indices);
+NumericVector c_sub2ind(IntegerVector dims, IntegerMatrix indices);
 RcppExport SEXP _natcpp_c_sub2ind(SEXP dimsSEXP, SEXP indicesSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericVector >::type dims(dimsSEXP);
-    Rcpp::traits::input_parameter< NumericMatrix >::type indices(indicesSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type dims(dimsSEXP);
+    Rcpp::traits::input_parameter< IntegerMatrix >::type indices(indicesSEXP);
     rcpp_result_gen = Rcpp::wrap(c_sub2ind(dims, indices));
     return rcpp_result_gen;
 END_RCPP
 }
 // c_coords21dindex
-NumericVector c_coords21dindex(SEXP xyz, NumericVector origin, NumericVector voxdims, NumericVector dims, bool clamp);
+NumericVector c_coords21dindex(SEXP xyz, NumericVector origin, NumericVector voxdims, IntegerVector dims, bool clamp);
 RcppExport SEXP _natcpp_c_coords21dindex(SEXP xyzSEXP, SEXP originSEXP, SEXP voxdimsSEXP, SEXP dimsSEXP, SEXP clampSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -74,7 +74,7 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< SEXP >::type xyz(xyzSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type origin(originSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type voxdims(voxdimsSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type dims(dimsSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type dims(dimsSEXP);
     Rcpp::traits::input_parameter< bool >::type clamp(clampSEXP);
     rcpp_result_gen = Rcpp::wrap(c_coords21dindex(xyz, origin, voxdims, dims, clamp));
     return rcpp_result_gen;
