@@ -115,7 +115,7 @@ IntegerMatrix c_ijkpos(SEXP xyz,
 //' @return numeric vector of linear indices into the array
 //' @export
 // [[Rcpp::export]]
-NumericVector c_sub2ind(NumericVector dims, NumericMatrix indices) {
+NumericVector c_sub2ind(IntegerVector dims, NumericMatrix indices) {
   int n = indices.nrow();
   int d = indices.ncol();
 
@@ -148,7 +148,7 @@ template <typename coords>
 NumericVector coords21dindex_core(const PtAccessor<coords>& xyz,
                             const NumericVector& origin,
                             const NumericVector& voxdims,
-                            const NumericVector& dims,
+                            const IntegerVector& dims,
                             bool clamp = false) {
   int n = xyz.nrow;
   int d = xyz.ncol;
@@ -203,7 +203,7 @@ NumericVector coords21dindex_core(const PtAccessor<coords>& xyz,
 NumericVector c_coords21dindex(SEXP xyz,
                   NumericVector origin,
                   NumericVector voxdims,
-                  NumericVector dims,
+                  IntegerVector dims,
                   bool clamp = false) {
   if (Rcpp::is<NumericMatrix>(xyz)) {
     NumericMatrix mat = as<NumericMatrix>(xyz);
