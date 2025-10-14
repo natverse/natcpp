@@ -1,16 +1,17 @@
+Adds new functions for fast operations on 3D coordinates and indices
+
 ## Test environments
-* local R installation, R 4.1.0
+* win-builder (devel)
+* local R installation, R 4.5.1
 * Continuous Integration via GitHub actions
   * windows-latest (release)
   * macOS-latest (release)
-  * ubuntu-20.04 (release)
-  * ubuntu-20.04 (devel)
-* win-builder (devel)
+  * ubuntu-latest (release)
+  * ubuntu-latest (devel)
+  * ubuntu-latest (oldrel-1)
 
 ## R CMD check results
 
-https://win-builder.r-project.org/St5za8G63m50/
+https://win-builder.r-project.org/bK0J7np25XzB/
 
-0 errors | 0 warnings | 1 note
-
-* New submission
+0 errors | 0 warnings | 0 note
