@@ -20,9 +20,15 @@ test_that("ijkpos, c_sub2ind, c_coords21dindex", {
                c_ijkpos(xyz_df, origin, voxdims, dims, clamp = TRUE))
 
   bl=c(1,622)
-  expect_equal(c_sub2ind(dims, indices = ijk),bl)
+  expect_equal(c_sub2ind(dims, indices = ijk), bl)
+  expect_error(c_sub2ind(dims[1:2], indices = ijk))
+
+  # test that we can use double indices as input
+  mode(ijk)='double'
   expect_equal(
     c_sub2ind(dims, indices = ijk),
     c_coords21dindex(xyz_mat[1:2,], origin = origin, voxdims = voxdims, dims = dims))
-
+  expect_warning(expect_equal(
+    c_coords21dindex(as.data.frame(xyz_mat), origin = origin, voxdims = voxdims, dims = dims, clamp = T),
+    c(1, 622, 24000)))
 })
