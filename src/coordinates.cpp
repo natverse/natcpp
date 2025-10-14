@@ -98,10 +98,10 @@ IntegerMatrix c_ijkpos(SEXP xyz,
                 IntegerVector dims,
                 bool clamp = false) {
   // Dispatch on type without copying
-  if (Rf_isMatrix(xyz)) {
+  if (is<NumericMatrix>(xyz)) {
     NumericMatrix mat = as<NumericMatrix>(xyz);
     return ijkpos_core(PtAccessor<NumericMatrix>(mat), origin, voxdims, dims, clamp);
-  } else if (Rf_isFrame(xyz)) {
+  } else if (is<DataFrame>(xyz)) {
     DataFrame df = as<DataFrame>(xyz);
     return ijkpos_core(PtAccessor<DataFrame>(df), origin, voxdims, dims, clamp);
   } else {
