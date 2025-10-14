@@ -1,42 +1,19 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>/404.html</loc>
-  </url>
-  <url>
-    <loc>/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>/SUPPORT.html</loc>
-  </url>
-  <url>
-    <loc>/authors.html</loc>
-  </url>
-  <url>
-    <loc>/index.html</loc>
-  </url>
-  <url>
-    <loc>/news/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/c_EdgeListFromSegList.html</loc>
-  </url>
-  <url>
-    <loc>/reference/c_ListofMatrixRows.html</loc>
-  </url>
-  <url>
-    <loc>/reference/c_listlengths.html</loc>
-  </url>
-  <url>
-    <loc>/reference/c_seglengths.html</loc>
-  </url>
-  <url>
-    <loc>/reference/c_topntail.html</loc>
-  </url>
-  <url>
-    <loc>/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/natcpp-package.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://natverse.org/natcpp/404.html</loc></url>
+<url><loc>https://natverse.org/natcpp/LICENSE.html</loc></url>
+<url><loc>https://natverse.org/natcpp/SUPPORT.html</loc></url>
+<url><loc>https://natverse.org/natcpp/authors.html</loc></url>
+<url><loc>https://natverse.org/natcpp/index.html</loc></url>
+<url><loc>https://natverse.org/natcpp/news/index.html</loc></url>
+<url><loc>https://natverse.org/natcpp/reference/c_EdgeListFromSegList.html</loc></url>
+<url><loc>https://natverse.org/natcpp/reference/c_ListofMatrixRows.html</loc></url>
+<url><loc>https://natverse.org/natcpp/reference/c_coords21dindex.html</loc></url>
+<url><loc>https://natverse.org/natcpp/reference/c_ijkpos.html</loc></url>
+<url><loc>https://natverse.org/natcpp/reference/c_listlengths.html</loc></url>
+<url><loc>https://natverse.org/natcpp/reference/c_seglengths.html</loc></url>
+<url><loc>https://natverse.org/natcpp/reference/c_sub2ind.html</loc></url>
+<url><loc>https://natverse.org/natcpp/reference/c_topntail.html</loc></url>
+<url><loc>https://natverse.org/natcpp/reference/index.html</loc></url>
+<url><loc>https://natverse.org/natcpp/reference/natcpp-package.html</loc></url>
 </urlset>
+
