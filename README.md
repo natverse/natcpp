@@ -4,10 +4,9 @@
 <!-- badges: start -->
 [![natverse](https://img.shields.io/badge/natverse-Part%20of%20the%20natverse-a241b6)](https://natverse.org)
 [![Docs](https://img.shields.io/badge/docs-100%25-brightgreen.svg)](https://natverse.org/natcpp/reference/)
-[![R-CMD-check](https://github.com/natverse/natcpp/workflows/R-CMD-check/badge.svg)](https://github.com/natverse/natcpp/actions)
+[![R-CMD-check](https://github.com/natverse/natcpp/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/natverse/natcpp/actions/workflows/R-CMD-check.yaml)
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![CRAN status](https://www.r-pkg.org/badges/version/natcpp)](https://CRAN.R-project.org/package=natcpp)
-[![R-CMD-check](https://github.com/natverse/natcpp/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/natverse/natcpp/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 The goal of *natcpp* is to provide accelerated routines through compiled C++ 
