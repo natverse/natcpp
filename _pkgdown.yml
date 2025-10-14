@@ -1,26 +1,33 @@
+url: https://natverse.org/natcpp/
+template:
+  bootstrap: 5
 navbar:
   structure:
     left:
-    - home
     - intro
     - reference
     - articles
     - tutorials
-    - news
     - help
+    - news
     right:
-    - natverse
+    - search
     - github
+    - natverse
+    - lightswitch
   components:
-    home:
-      icon: fas fa-home fa-lg
-      href: index.html
     reference:
       text: Reference
       href: reference/index.html
+    search:
+      search: []
+    news:
+      text: Changelog
+      href: news/index.html
     github:
       icon: fab fa-github fa-lg
       href: https://github.com/natverse/natcpp/
+      aria-label: GitHub
     natverse:
       text: natverse
       href: https://natverse.github.io

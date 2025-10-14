@@ -16,7 +16,7 @@ Description: Fast functions implemented in C++ via 'Rcpp' to support the
     package will automatically use routines from this package when it is
     available to enable large performance gains.
 License: GPL (>= 3)
-URL: https://github.com/natverse/natcpp
+URL: https://github.com/natverse/natcpp, https://natverse.org/natcpp/
 BugReports: https://github.com/natverse/natcpp/issues
 Imports: 
     Rcpp (>= 1.0.6)
