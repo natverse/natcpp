@@ -7,6 +7,7 @@
 [![R-CMD-check](https://github.com/natverse/natcpp/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/natverse/natcpp/actions/workflows/R-CMD-check.yaml)
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![CRAN status](https://www.r-pkg.org/badges/version/natcpp)](https://CRAN.R-project.org/package=natcpp)
+[![Codecov test coverage](https://codecov.io/gh/natverse/natcpp/graph/badge.svg)](https://app.codecov.io/gh/natverse/natcpp)
 <!-- badges: end -->
 
 The goal of *natcpp* is to provide accelerated routines through compiled C++ 
