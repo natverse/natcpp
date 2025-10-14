@@ -2,8 +2,11 @@
 
 export(c_EdgeListFromSegList)
 export(c_ListofMatrixRows)
+export(c_coords21dindex)
+export(c_ijkpos)
 export(c_listlengths)
 export(c_seglengths)
+export(c_sub2ind)
 export(c_topntail)
 export(c_topntail_list)
 export(c_total_cable)
