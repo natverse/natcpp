@@ -135,3 +135,38 @@ c_EdgeListFromSegList <- function(L) {
     .Call(`_natcpp_c_EdgeListFromSegList`, L)
 }
 
+#' Fill min_sums into a sparse pattern for weighted Jaccard similarity
+#'
+#' Given a dgCMatrix \code{x} and a sparsity pattern \code{pattern} (from
+#' \code{crossprod(binarise(x))}), compute the sum of element-wise minima
+#' for each pair of columns (or rows) that co-occur in at least one feature.
+#' Intended for internal use by \code{coconat::jaccard_sim}.
+#'
+#' @param x A dgCMatrix (sparse column-compressed matrix)
+#' @param pattern A dgCMatrix giving the output sparsity pattern
+#' @param transpose If \code{FALSE}, compare columns; if \code{TRUE}, compare
+#'   rows
+#' @return A numeric vector of min_sums aligned with the pattern's slot
+#'   structure
+#' @export
+weighted_jaccard_sparse_fill_cpp <- function(x, pattern, transpose = FALSE) {
+    .Call(`_natcpp_weighted_jaccard_sparse_fill_cpp`, x, pattern, transpose)
+}
+
+#' Dense weighted Jaccard similarity via C++
+#'
+#' Compute the full weighted Jaccard similarity matrix for a dgCMatrix using
+#' an adaptive dense accumulation strategy. For small output matrices, uses a
+#' feature-oriented loop; for large outputs, switches to a column-oriented
+#' loop for better cache performance. Intended for internal use by
+#' \code{coconat::jaccard_sim}.
+#'
+#' @param x A dgCMatrix (sparse column-compressed matrix)
+#' @param transpose If \code{FALSE}, compare columns; if \code{TRUE}, compare
+#'   rows
+#' @return A dense numeric similarity matrix
+#' @export
+weighted_jaccard_dense_cpp <- function(x, transpose = FALSE) {
+    .Call(`_natcpp_weighted_jaccard_dense_cpp`, x, transpose)
+}
+
