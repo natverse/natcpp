@@ -4,13 +4,16 @@
 \alias{c_weighted_jaccard_sparse}
 \title{Sparse weighted Jaccard similarity via C++}
 \usage{
-c_weighted_jaccard_sparse(x, transpose = FALSE)
+c_weighted_jaccard_sparse(x, transpose = FALSE, display_progress = TRUE)
 }
 \arguments{
 \item{x}{A dgCMatrix (sparse column-compressed matrix)}
 
 \item{transpose}{If \code{FALSE} (default), compare columns; if
 \code{TRUE}, compare rows.}
+
+\item{display_progress}{Whether to show a text progress bar (default
+\code{TRUE}).}
 }
 \value{
 A symmetric sparse dsCMatrix similarity matrix

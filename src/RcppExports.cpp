@@ -136,15 +136,16 @@ BEGIN_RCPP
 END_RCPP
 }
 // weighted_jaccard_sparse_fill
-NumericVector weighted_jaccard_sparse_fill(const S4& x, const S4& pattern, bool transpose);
-RcppExport SEXP _natcpp_weighted_jaccard_sparse_fill(SEXP xSEXP, SEXP patternSEXP, SEXP transposeSEXP) {
+NumericVector weighted_jaccard_sparse_fill(const S4& x, const S4& pattern, bool transpose, bool display_progress);
+RcppExport SEXP _natcpp_weighted_jaccard_sparse_fill(SEXP xSEXP, SEXP patternSEXP, SEXP transposeSEXP, SEXP display_progressSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const S4& >::type x(xSEXP);
     Rcpp::traits::input_parameter< const S4& >::type pattern(patternSEXP);
     Rcpp::traits::input_parameter< bool >::type transpose(transposeSEXP);
-    rcpp_result_gen = Rcpp::wrap(weighted_jaccard_sparse_fill(x, pattern, transpose));
+    Rcpp::traits::input_parameter< bool >::type display_progress(display_progressSEXP);
+    rcpp_result_gen = Rcpp::wrap(weighted_jaccard_sparse_fill(x, pattern, transpose, display_progress));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -172,7 +173,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_natcpp_c_topntail", (DL_FUNC) &_natcpp_c_topntail, 1},
     {"_natcpp_c_topntail_list", (DL_FUNC) &_natcpp_c_topntail_list, 1},
     {"_natcpp_c_EdgeListFromSegList", (DL_FUNC) &_natcpp_c_EdgeListFromSegList, 1},
-    {"_natcpp_weighted_jaccard_sparse_fill", (DL_FUNC) &_natcpp_weighted_jaccard_sparse_fill, 3},
+    {"_natcpp_weighted_jaccard_sparse_fill", (DL_FUNC) &_natcpp_weighted_jaccard_sparse_fill, 4},
     {"_natcpp_c_weighted_jaccard_dense", (DL_FUNC) &_natcpp_c_weighted_jaccard_dense, 2},
     {NULL, NULL, 0}
 };

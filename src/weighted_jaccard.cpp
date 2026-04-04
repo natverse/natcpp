@@ -1,13 +1,15 @@
 #include <Rcpp.h>
 #include <algorithm>
 #include <vector>
+#include <progress.hpp>
 
 using namespace Rcpp;
 
 //' @noRd
 // [[Rcpp::export]]
 NumericVector weighted_jaccard_sparse_fill(
-    const S4& x, const S4& pattern, bool transpose = false) {
+    const S4& x, const S4& pattern, bool transpose = false,
+    bool display_progress = true) {
 
   // Original matrix slots (dgCMatrix: nr x nc)
   IntegerVector dims = x.slot("Dim");
@@ -98,8 +100,12 @@ NumericVector weighted_jaccard_sparse_fill(
   // Populated once per output column, then cleared.
   std::vector<int> row_to_pos(ncomp, -1);
 
+  Progress prog(ncomp, display_progress);
+
   // Iterate over output columns
   for (int cb = 0; cb < ncomp; ++cb) {
+    if (Progress::check_abort()) return NumericVector(annz);
+    prog.increment();
     // Populate row_to_pos for pattern column cb
     for (int idx = Ap[cb]; idx < Ap[cb + 1]; ++idx)
       row_to_pos[Ai[idx]] = idx;

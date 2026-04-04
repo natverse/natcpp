@@ -56,10 +56,10 @@ test_that("c_weighted_jaccard_sparse matches dense", {
   )
 
   sim_dense <- c_weighted_jaccard_dense(m, transpose = FALSE)
-  sim_sparse <- c_weighted_jaccard_sparse(m, transpose = FALSE)
+  sim_sparse <- c_weighted_jaccard_sparse(m, transpose = FALSE, display_progress = FALSE)
   expect_equal(as.matrix(sim_sparse), sim_dense, tolerance = 1e-12)
 
   sim_dense_t <- c_weighted_jaccard_dense(m, transpose = TRUE)
-  sim_sparse_t <- c_weighted_jaccard_sparse(m, transpose = TRUE)
+  sim_sparse_t <- c_weighted_jaccard_sparse(m, transpose = TRUE, display_progress = FALSE)
   expect_equal(as.matrix(sim_sparse_t), sim_dense_t, tolerance = 1e-12)
 })

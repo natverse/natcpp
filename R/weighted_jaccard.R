@@ -6,9 +6,11 @@
 #' feature, then normalises to similarity. Only the upper triangle is computed,
 #' taking advantage of the symmetry of the Jaccard index.
 #'
-#' @param x A \code[Matrix]{Matrix} object of class dgCMatrix (sparse column-compressed matrix)
+#' @param x A dgCMatrix (sparse column-compressed matrix)
 #' @param transpose If \code{FALSE} (default), compare columns; if
 #'   \code{TRUE}, compare rows.
+#' @param display_progress Whether to show a text progress bar (default
+#'   \code{TRUE}).
 #' @return A symmetric sparse dsCMatrix similarity matrix
 #' @export
 #' @seealso \code{\link{c_weighted_jaccard_dense}} for the dense equivalent
@@ -19,7 +21,7 @@
 #'                   x = c(4,2,1,3,3,1), dims = c(3,3))
 #' c_weighted_jaccard_sparse(m)
 #' }
-c_weighted_jaccard_sparse <- function(x, transpose = FALSE) {
+c_weighted_jaccard_sparse <- function(x, transpose = FALSE, display_progress = TRUE) {
   crossfun <- if (transpose) Matrix::tcrossprod else Matrix::crossprod
   n <- if (transpose) nrow(x) else ncol(x)
 
@@ -37,7 +39,8 @@ c_weighted_jaccard_sparse <- function(x, transpose = FALSE) {
   totals <- if (transpose) Matrix::rowSums(x) else Matrix::colSums(x)
 
   # Fill in min_sums using C++ (only upper triangle entries)
-  A@x <- weighted_jaccard_sparse_fill(x, A, transpose = transpose)
+  A@x <- weighted_jaccard_sparse_fill(x, A, transpose = transpose,
+                                      display_progress = display_progress)
 
   # Convert min_sums to similarity: sim = ms / (s_i + s_j - ms)
   col_idx <- rep(seq_along(diff(A@p)), diff(A@p))

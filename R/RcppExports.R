@@ -136,8 +136,8 @@ c_EdgeListFromSegList <- function(L) {
 }
 
 #' @noRd
-weighted_jaccard_sparse_fill <- function(x, pattern, transpose = FALSE) {
-    .Call(`_natcpp_weighted_jaccard_sparse_fill`, x, pattern, transpose)
+weighted_jaccard_sparse_fill <- function(x, pattern, transpose = FALSE, display_progress = TRUE) {
+    .Call(`_natcpp_weighted_jaccard_sparse_fill`, x, pattern, transpose, display_progress)
 }
 
 #' Dense weighted Jaccard similarity via C++
