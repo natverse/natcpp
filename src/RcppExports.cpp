@@ -135,28 +135,28 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// weighted_jaccard_sparse_fill_cpp
-NumericVector weighted_jaccard_sparse_fill_cpp(const S4& x, const S4& pattern, bool transpose);
-RcppExport SEXP _natcpp_weighted_jaccard_sparse_fill_cpp(SEXP xSEXP, SEXP patternSEXP, SEXP transposeSEXP) {
+// weighted_jaccard_sparse_fill
+NumericVector weighted_jaccard_sparse_fill(const S4& x, const S4& pattern, bool transpose);
+RcppExport SEXP _natcpp_weighted_jaccard_sparse_fill(SEXP xSEXP, SEXP patternSEXP, SEXP transposeSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const S4& >::type x(xSEXP);
     Rcpp::traits::input_parameter< const S4& >::type pattern(patternSEXP);
     Rcpp::traits::input_parameter< bool >::type transpose(transposeSEXP);
-    rcpp_result_gen = Rcpp::wrap(weighted_jaccard_sparse_fill_cpp(x, pattern, transpose));
+    rcpp_result_gen = Rcpp::wrap(weighted_jaccard_sparse_fill(x, pattern, transpose));
     return rcpp_result_gen;
 END_RCPP
 }
-// weighted_jaccard_dense_cpp
-NumericMatrix weighted_jaccard_dense_cpp(const S4& x, bool transpose);
-RcppExport SEXP _natcpp_weighted_jaccard_dense_cpp(SEXP xSEXP, SEXP transposeSEXP) {
+// c_weighted_jaccard_dense
+NumericMatrix c_weighted_jaccard_dense(const S4& x, bool transpose);
+RcppExport SEXP _natcpp_c_weighted_jaccard_dense(SEXP xSEXP, SEXP transposeSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const S4& >::type x(xSEXP);
     Rcpp::traits::input_parameter< bool >::type transpose(transposeSEXP);
-    rcpp_result_gen = Rcpp::wrap(weighted_jaccard_dense_cpp(x, transpose));
+    rcpp_result_gen = Rcpp::wrap(c_weighted_jaccard_dense(x, transpose));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -172,8 +172,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"_natcpp_c_topntail", (DL_FUNC) &_natcpp_c_topntail, 1},
     {"_natcpp_c_topntail_list", (DL_FUNC) &_natcpp_c_topntail_list, 1},
     {"_natcpp_c_EdgeListFromSegList", (DL_FUNC) &_natcpp_c_EdgeListFromSegList, 1},
-    {"_natcpp_weighted_jaccard_sparse_fill_cpp", (DL_FUNC) &_natcpp_weighted_jaccard_sparse_fill_cpp, 3},
-    {"_natcpp_weighted_jaccard_dense_cpp", (DL_FUNC) &_natcpp_weighted_jaccard_dense_cpp, 2},
+    {"_natcpp_weighted_jaccard_sparse_fill", (DL_FUNC) &_natcpp_weighted_jaccard_sparse_fill, 3},
+    {"_natcpp_c_weighted_jaccard_dense", (DL_FUNC) &_natcpp_c_weighted_jaccard_dense, 2},
     {NULL, NULL, 0}
 };
 

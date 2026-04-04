@@ -4,22 +4,9 @@
 
 using namespace Rcpp;
 
-//' Fill min_sums into a sparse pattern for weighted Jaccard similarity
-//'
-//' Given a dgCMatrix \code{x} and a sparsity pattern \code{pattern} (from
-//' \code{crossprod(binarise(x))}), compute the sum of element-wise minima
-//' for each pair of columns (or rows) that co-occur in at least one feature.
-//' Intended for internal use by \code{coconat::jaccard_sim}.
-//'
-//' @param x A dgCMatrix (sparse column-compressed matrix)
-//' @param pattern A dgCMatrix giving the output sparsity pattern
-//' @param transpose If \code{FALSE}, compare columns; if \code{TRUE}, compare
-//'   rows
-//' @return A numeric vector of min_sums aligned with the pattern's slot
-//'   structure
-//' @export
+//' @noRd
 // [[Rcpp::export]]
-NumericVector weighted_jaccard_sparse_fill_cpp(
+NumericVector weighted_jaccard_sparse_fill(
     const S4& x, const S4& pattern, bool transpose = false) {
 
   // Original matrix slots (dgCMatrix: nr x nc)
@@ -145,7 +132,7 @@ NumericVector weighted_jaccard_sparse_fill_cpp(
 //' an adaptive dense accumulation strategy. For small output matrices, uses a
 //' feature-oriented loop; for large outputs, switches to a column-oriented
 //' loop for better cache performance. Intended for internal use by
-//' \code{coconat::jaccard_sim}.
+//' \code{coconat::jaccard_sim}. See also \code{\link{c_weighted_jaccard_sparse}}.
 //'
 //' @param x A dgCMatrix (sparse column-compressed matrix)
 //' @param transpose If \code{FALSE}, compare columns; if \code{TRUE}, compare
@@ -153,7 +140,7 @@ NumericVector weighted_jaccard_sparse_fill_cpp(
 //' @return A dense numeric similarity matrix
 //' @export
 // [[Rcpp::export]]
-NumericMatrix weighted_jaccard_dense_cpp(const S4& x, bool transpose = false) {
+NumericMatrix c_weighted_jaccard_dense(const S4& x, bool transpose = false) {
   IntegerVector dims = x.slot("Dim");
   IntegerVector xi = x.slot("i");
   IntegerVector xp = x.slot("p");
