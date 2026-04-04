@@ -1,0 +1,72 @@
+# natcpp
+
+The goal of *natcpp* is to provide accelerated routines through compiled
+C++ code for basic functions to support the
+[natverse](https://natverse.org) computational neuroanatomy ecosystem.
+*natcpp* is not designed to be used by end users but instead the
+[nat](https://natverse.org/nat/) package will use it when available to
+enable large speed-ups for some primitive operations. End users should
+therefore not count on the *natcpp* functions/interface being stable,
+especially during its initial development.
+
+Our plan is to get this onto CRAN quite quickly so that binary packages
+will be available to Mac/Windows users who do not have a full C compiler
+toolchain installed. Once on CRAN, we will try to keep the package
+simple and stable, with infrequent updates. A development version will
+be available via the relevant github repository (see below). We do not
+intend to specify a GitHub remote so these updates will not be installed
+by default i.e. we will prefer CRAN binaries unless the user intervenes.
+
+## Installation
+
+Install the released version of natcpp from
+[CRAN](https://cran.r-project.org/package=natcpp) with:
+
+``` r
+install.packages("natcpp")
+```
+
+For the development version, please do:
+
+``` r
+install.packages("natmanager")
+natmanager::install(pkgs = 'natverse/natcpp')
+```
+
+## Example
+
+As already noted, the intention is that end users will only use the nat
+package (and that will automagically use natcpp when available). However
+to prove that everything is set up properly, you could do:
+
+``` r
+library(nat)
+library(natcpp)
+topntail(as.seglist(Cell07PNs[[1]]))
+```
+
+# Package index
+
+## All functions
+
+- [`c_EdgeListFromSegList()`](https://natverse.org/natcpp/reference/c_EdgeListFromSegList.md)
+  : Turn a segment list into an edgelist suitable for constructing an
+  ngraph
+- [`c_ListofMatrixRows()`](https://natverse.org/natcpp/reference/c_ListofMatrixRows.md)
+  : Convert a matrix into list of row vectors
+- [`c_coords21dindex()`](https://natverse.org/natcpp/reference/c_coords21dindex.md)
+  : Convert physical coordinates to 1d indices into image array
+- [`c_ijkpos()`](https://natverse.org/natcpp/reference/c_ijkpos.md) :
+  Convert physical coordinates to pixel coordinates
+- [`c_listlengths()`](https://natverse.org/natcpp/reference/c_listlengths.md)
+  : A simple function to compute the lengths of the elements of an R
+  list
+- [`c_seglengths()`](https://natverse.org/natcpp/reference/c_seglengths.md)
+  [`c_total_cable()`](https://natverse.org/natcpp/reference/c_seglengths.md)
+  : Compute summed segment lengths or total cable
+- [`c_sub2ind()`](https://natverse.org/natcpp/reference/c_sub2ind.md) :
+  Find 1D index given n-dimensional indices
+- [`c_topntail()`](https://natverse.org/natcpp/reference/c_topntail.md)
+  [`c_topntail_list()`](https://natverse.org/natcpp/reference/c_topntail.md)
+  : Find the first and last elements of all vectors in a list
+
