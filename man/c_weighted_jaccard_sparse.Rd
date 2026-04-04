@@ -13,13 +13,14 @@ c_weighted_jaccard_sparse(x, transpose = FALSE)
 \code{TRUE}, compare rows.}
 }
 \value{
-A sparse dgCMatrix similarity matrix
+A symmetric sparse dsCMatrix similarity matrix
 }
 \description{
 Compute the weighted Jaccard similarity matrix for a dgCMatrix, returning a
-sparse result. Uses \code{weighted_jaccard_sparse_fill} to compute
+symmetric sparse result. Uses \code{weighted_jaccard_sparse_fill} to compute
 min-sums only for column (or row) pairs that share at least one non-zero
-feature, then normalises to similarity.
+feature, then normalises to similarity. Only the upper triangle is computed,
+taking advantage of the symmetry of the Jaccard index.
 }
 \examples{
 \dontrun{

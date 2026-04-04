@@ -1,14 +1,15 @@
 #' Sparse weighted Jaccard similarity via C++
 #'
 #' Compute the weighted Jaccard similarity matrix for a dgCMatrix, returning a
-#' sparse result. Uses \code{weighted_jaccard_sparse_fill} to compute
+#' symmetric sparse result. Uses \code{weighted_jaccard_sparse_fill} to compute
 #' min-sums only for column (or row) pairs that share at least one non-zero
-#' feature, then normalises to similarity.
+#' feature, then normalises to similarity. Only the upper triangle is computed,
+#' taking advantage of the symmetry of the Jaccard index.
 #'
-#' @param x A dgCMatrix (sparse column-compressed matrix)
+#' @param x A \code[Matrix]{Matrix} object of class dgCMatrix (sparse column-compressed matrix)
 #' @param transpose If \code{FALSE} (default), compare columns; if
 #'   \code{TRUE}, compare rows.
-#' @return A sparse dgCMatrix similarity matrix
+#' @return A symmetric sparse dsCMatrix similarity matrix
 #' @export
 #' @seealso \code{\link{c_weighted_jaccard_dense}} for the dense equivalent
 #' @examples
@@ -24,18 +25,18 @@ c_weighted_jaccard_sparse <- function(x, transpose = FALSE) {
 
   if (length(x@x) == 0L) {
     return(Matrix::sparseMatrix(i = seq_len(n), j = seq_len(n), x = 1,
-                                dims = c(n, n)))
+                                dims = c(n, n), symmetric = TRUE))
   }
 
-  # Sparsity pattern from binarised crossprod
+  # Sparsity pattern from binarised crossprod — dsCMatrix (upper triangle)
   b <- x
   b@x <- rep(1, length(b@x))
-  A <- as(crossfun(b), "generalMatrix")
+  A <- crossfun(b)
 
   # Column/row totals for denominator
   totals <- if (transpose) Matrix::rowSums(x) else Matrix::colSums(x)
 
-  # Fill in min_sums using C++
+  # Fill in min_sums using C++ (only upper triangle entries)
   A@x <- weighted_jaccard_sparse_fill(x, A, transpose = transpose)
 
   # Convert min_sums to similarity: sim = ms / (s_i + s_j - ms)
@@ -45,7 +46,10 @@ c_weighted_jaccard_sparse <- function(x, transpose = FALSE) {
   nonzero <- denom != 0
   A@x[nonzero] <- A@x[nonzero] / denom[nonzero]
   A@x[!nonzero] <- 0
-  Matrix::diag(A) <- 1
+
+  # Set diagonal to 1 — diagonal entries are in the upper triangle pattern
+  diag_pos <- which(A@i + 1L == col_idx)
+  A@x[diag_pos] <- 1
 
   A
 }
