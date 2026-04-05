@@ -4,7 +4,12 @@
 \alias{c_weighted_jaccard_sparse}
 \title{Sparse weighted Jaccard similarity via C++}
 \usage{
-c_weighted_jaccard_sparse(x, transpose = FALSE, display_progress = TRUE)
+c_weighted_jaccard_sparse(
+  x,
+  transpose = FALSE,
+  display_progress = TRUE,
+  threads = 4L
+)
 }
 \arguments{
 \item{x}{A dgCMatrix (sparse column-compressed matrix)}
@@ -14,6 +19,9 @@ c_weighted_jaccard_sparse(x, transpose = FALSE, display_progress = TRUE)
 
 \item{display_progress}{Whether to show a text progress bar (default
 \code{TRUE}).}
+
+\item{threads}{Number of threads for parallel computation (default 4).
+Set to 0 to use all available cores.}
 }
 \value{
 A symmetric sparse dsCMatrix similarity matrix

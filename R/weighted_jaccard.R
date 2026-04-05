@@ -11,6 +11,8 @@
 #'   \code{TRUE}, compare rows.
 #' @param display_progress Whether to show a text progress bar (default
 #'   \code{TRUE}).
+#' @param threads Number of threads for parallel computation (default 4).
+#'   Set to 0 to use all available cores.
 #' @return A symmetric sparse dsCMatrix similarity matrix
 #' @export
 #' @seealso \code{\link{c_weighted_jaccard_dense}} for the dense equivalent
@@ -21,7 +23,8 @@
 #'                   x = c(4,2,1,3,3,1), dims = c(3,3))
 #' c_weighted_jaccard_sparse(m)
 #' }
-c_weighted_jaccard_sparse <- function(x, transpose = FALSE, display_progress = TRUE) {
+c_weighted_jaccard_sparse <- function(x, transpose = FALSE, display_progress = TRUE,
+                                      threads = 4L) {
   crossfun <- if (transpose) Matrix::tcrossprod else Matrix::crossprod
   n <- if (transpose) nrow(x) else ncol(x)
 
@@ -40,7 +43,8 @@ c_weighted_jaccard_sparse <- function(x, transpose = FALSE, display_progress = T
 
   # Fill in min_sums using C++ (only upper triangle entries)
   A@x <- weighted_jaccard_sparse_fill(x, A, transpose = transpose,
-                                      display_progress = display_progress)
+                                      display_progress = display_progress,
+                                      threads = threads)
 
   # Convert min_sums to similarity: sim = ms / (s_i + s_j - ms)
   col_idx <- rep(seq_along(diff(A@p)), diff(A@p))

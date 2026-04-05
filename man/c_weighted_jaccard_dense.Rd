@@ -4,7 +4,7 @@
 \alias{c_weighted_jaccard_dense}
 \title{Dense weighted Jaccard similarity via C++}
 \usage{
-c_weighted_jaccard_dense(x, transpose = FALSE)
+c_weighted_jaccard_dense(x, transpose = FALSE, threads = 4L)
 }
 \arguments{
 \item{x}{A dgCMatrix (sparse column-compressed matrix)}
