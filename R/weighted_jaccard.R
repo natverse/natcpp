@@ -1,12 +1,13 @@
 #' Sparse weighted Jaccard similarity via C++
 #'
-#' Compute the weighted Jaccard similarity matrix for a dgCMatrix, returning a
+#' Compute the weighted Jaccard similarity matrix for a
+#' \link[Matrix:dgCMatrix-class]{dgCMatrix}, returning a
 #' sparse result. Uses \code{weighted_jaccard_sparse_fill} to compute min-sums
 #' only for column (or row) pairs that share at least one non-zero feature, then
 #' normalises to similarity. Only the upper triangle is computed, taking
 #' advantage of the symmetry of the Jaccard index.
 #'
-#' @param x A dgCMatrix (sparse column-compressed matrix)
+#' @param x A \link[Matrix:dgCMatrix-class]{dgCMatrix} (sparse column-compressed matrix)
 #' @param transpose If \code{FALSE} (default), compare columns; if
 #'   \code{TRUE}, compare rows.
 #' @param display_progress Whether to show a text progress bar (default
@@ -15,12 +16,12 @@
 #'   Set to 0 to use all available cores.
 #' @param triangle If \code{TRUE}, return a symmetric \code{dsCMatrix}
 #'   (upper triangle only). If \code{FALSE} (default), return a general
-#'   \code{dgCMatrix}.
+#'   \link[Matrix:dgCMatrix-class]{dgCMatrix}.
 #' @param distance If \code{TRUE}, return distance (\code{1 - similarity})
 #'   instead of similarity. Default \code{FALSE}. A warning is issued since
 #'   sparse distance matrices are typically dense.
 #' @return A sparse similarity (or distance) matrix: \code{dsCMatrix} when
-#'   \code{triangle = TRUE}, \code{dgCMatrix} otherwise.
+#'   \code{triangle = TRUE}, \link[Matrix:dgCMatrix-class]{dgCMatrix} otherwise.
 #' @importFrom methods as
 #' @export
 #' @seealso \code{\link{c_weighted_jaccard_dense}} for the dense equivalent

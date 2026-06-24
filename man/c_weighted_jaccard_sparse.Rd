@@ -14,7 +14,7 @@ c_weighted_jaccard_sparse(
 )
 }
 \arguments{
-\item{x}{A dgCMatrix (sparse column-compressed matrix)}
+\item{x}{A \link[Matrix:dgCMatrix-class]{dgCMatrix} (sparse column-compressed matrix)}
 
 \item{transpose}{If \code{FALSE} (default), compare columns; if
 \code{TRUE}, compare rows.}
@@ -27,7 +27,7 @@ Set to 0 to use all available cores.}
 
 \item{triangle}{If \code{TRUE}, return a symmetric \code{dsCMatrix}
 (upper triangle only). If \code{FALSE} (default), return a general
-\code{dgCMatrix}.}
+\link[Matrix:dgCMatrix-class]{dgCMatrix}.}
 
 \item{distance}{If \code{TRUE}, return distance (\code{1 - similarity})
 instead of similarity. Default \code{FALSE}. A warning is issued since
@@ -35,10 +35,11 @@ sparse distance matrices are typically dense.}
 }
 \value{
 A sparse similarity (or distance) matrix: \code{dsCMatrix} when
-  \code{triangle = TRUE}, \code{dgCMatrix} otherwise.
+  \code{triangle = TRUE}, \link[Matrix:dgCMatrix-class]{dgCMatrix} otherwise.
 }
 \description{
-Compute the weighted Jaccard similarity matrix for a dgCMatrix, returning a
+Compute the weighted Jaccard similarity matrix for a
+\link[Matrix:dgCMatrix-class]{dgCMatrix}, returning a
 sparse result. Uses \code{weighted_jaccard_sparse_fill} to compute min-sums
 only for column (or row) pairs that share at least one non-zero feature, then
 normalises to similarity. Only the upper triangle is computed, taking
