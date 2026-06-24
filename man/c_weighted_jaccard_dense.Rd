@@ -4,21 +4,36 @@
 \alias{c_weighted_jaccard_dense}
 \title{Dense weighted Jaccard similarity via C++}
 \usage{
-c_weighted_jaccard_dense(x, transpose = FALSE, threads = 4L)
+c_weighted_jaccard_dense(
+  x,
+  transpose = FALSE,
+  threads = 4L,
+  triangle = FALSE,
+  distance = FALSE
+)
 }
 \arguments{
 \item{x}{A dgCMatrix (sparse column-compressed matrix)}
 
 \item{transpose}{If \code{FALSE}, compare columns; if \code{TRUE}, compare
 rows}
+
+\item{threads}{Number of threads (default 4). Set to 0 for all cores.}
+
+\item{triangle}{If \code{TRUE}, return only the lower triangle as a flat
+numeric vector in \code{\link{dist}} layout. If \code{FALSE} (default),
+return a full square matrix.}
+
+\item{distance}{If \code{TRUE}, return distance (\code{1 - similarity})
+instead of similarity. Default \code{FALSE}.}
 }
 \value{
-A dense numeric similarity matrix
+A dense numeric similarity matrix, or a numeric vector in dist
+  layout when \code{triangle = TRUE}.
 }
 \description{
 Compute the full weighted Jaccard similarity matrix for a dgCMatrix using
 an adaptive dense accumulation strategy. For small output matrices, uses a
 feature-oriented loop; for large outputs, switches to a column-oriented
-loop for better cache performance. Intended for internal use by
-\code{coconat::jaccard_sim}. See also \code{\link{c_weighted_jaccard_sparse}}.
+loop for better cache performance.
 }

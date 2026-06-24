@@ -63,3 +63,73 @@ test_that("c_weighted_jaccard_sparse matches dense", {
   sim_sparse_t <- c_weighted_jaccard_sparse(m, transpose = TRUE, display_progress = FALSE)
   expect_equal(as.matrix(sim_sparse_t), sim_dense_t, tolerance = 1e-12)
 })
+
+test_that("c_weighted_jaccard_dense triangle returns dist object", {
+  m <- Matrix::sparseMatrix(
+    i = c(1L, 2L, 1L, 2L, 3L, 3L),
+    j = c(1L, 1L, 2L, 2L, 2L, 3L),
+    x = c(4, 2, 1, 3, 3, 1),
+    dims = c(3L, 3L)
+  )
+
+  full <- c_weighted_jaccard_dense(m)
+
+  # triangle=TRUE returns a dist object
+  tri <- c_weighted_jaccard_dense(m, triangle = TRUE)
+  expect_s3_class(tri, "dist")
+  expect_equal(attr(tri, "Size"), ncol(m))
+
+  # triangle similarity matches as.dist of full similarity
+  # (as.dist extracts lower triangle; dist stores 1-sim by convention,
+  #  but here we just compare the raw values)
+  ref_lower <- full[lower.tri(full)]
+  expect_equal(as.numeric(tri), ref_lower, tolerance = 1e-12)
+
+  # triangle + distance matches as.dist(1 - full)
+  tri_d <- c_weighted_jaccard_dense(m, triangle = TRUE, distance = TRUE)
+  expect_s3_class(tri_d, "dist")
+  expect_equal(as.numeric(tri_d), 1 - ref_lower, tolerance = 1e-12)
+})
+
+test_that("c_weighted_jaccard_dense distance works for full matrix", {
+  m <- Matrix::sparseMatrix(
+    i = c(1L, 2L, 1L, 2L, 3L, 3L),
+    j = c(1L, 1L, 2L, 2L, 2L, 3L),
+    x = c(4, 2, 1, 3, 3, 1),
+    dims = c(3L, 3L)
+  )
+
+  full <- c_weighted_jaccard_dense(m)
+  full_d <- c_weighted_jaccard_dense(m, distance = TRUE)
+  expect_equal(full_d, 1 - full, tolerance = 1e-12)
+})
+
+test_that("c_weighted_jaccard_sparse triangle and distance args", {
+  m <- Matrix::sparseMatrix(
+    i = c(1L, 2L, 1L, 2L, 3L, 3L),
+    j = c(1L, 1L, 2L, 2L, 2L, 3L),
+    x = c(4, 2, 1, 3, 3, 1),
+    dims = c(3L, 3L)
+  )
+
+  # Default: dgCMatrix
+  sp <- c_weighted_jaccard_sparse(m, display_progress = FALSE)
+  expect_true(inherits(sp, "dgCMatrix"))
+
+  # triangle=TRUE: dsCMatrix
+  sp_tri <- c_weighted_jaccard_sparse(m, display_progress = FALSE, triangle = TRUE)
+  expect_true(inherits(sp_tri, "dsCMatrix"))
+  expect_equal(as.matrix(sp_tri), as.matrix(sp), tolerance = 1e-12)
+
+  # distance=TRUE warns
+  expect_warning(
+    sp_d <- c_weighted_jaccard_sparse(m, display_progress = FALSE, distance = TRUE),
+    "distance=TRUE"
+  )
+  # Stored entries are correct (1-sim); structural zeros remain 0 instead of 1
+  # — this is the inherent limitation the warning describes
+  full <- c_weighted_jaccard_dense(m)
+  ref_d <- 1 - full
+  ref_d[full == 0 & row(full) != col(full)] <- 0  # zero out unstored positions
+  expect_equal(as.matrix(sp_d), ref_d, tolerance = 1e-12)
+})

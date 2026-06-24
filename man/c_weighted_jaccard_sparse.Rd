@@ -8,7 +8,9 @@ c_weighted_jaccard_sparse(
   x,
   transpose = FALSE,
   display_progress = TRUE,
-  threads = 4L
+  threads = 4L,
+  triangle = FALSE,
+  distance = FALSE
 )
 }
 \arguments{
@@ -22,16 +24,25 @@ c_weighted_jaccard_sparse(
 
 \item{threads}{Number of threads for parallel computation (default 4).
 Set to 0 to use all available cores.}
+
+\item{triangle}{If \code{TRUE}, return a symmetric \code{dsCMatrix}
+(upper triangle only). If \code{FALSE} (default), return a general
+\code{dgCMatrix}.}
+
+\item{distance}{If \code{TRUE}, return distance (\code{1 - similarity})
+instead of similarity. Default \code{FALSE}. A warning is issued since
+sparse distance matrices are typically dense.}
 }
 \value{
-A symmetric sparse dsCMatrix similarity matrix
+A sparse similarity (or distance) matrix: \code{dsCMatrix} when
+  \code{triangle = TRUE}, \code{dgCMatrix} otherwise.
 }
 \description{
 Compute the weighted Jaccard similarity matrix for a dgCMatrix, returning a
-symmetric sparse result. Uses \code{weighted_jaccard_sparse_fill} to compute
-min-sums only for column (or row) pairs that share at least one non-zero
-feature, then normalises to similarity. Only the upper triangle is computed,
-taking advantage of the symmetry of the Jaccard index.
+sparse result. Uses \code{weighted_jaccard_sparse_fill} to compute min-sums
+only for column (or row) pairs that share at least one non-zero feature, then
+normalises to similarity. Only the upper triangle is computed, taking
+advantage of the symmetry of the Jaccard index.
 }
 \examples{
 \dontrun{

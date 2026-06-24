@@ -1,10 +1,10 @@
 #' Sparse weighted Jaccard similarity via C++
 #'
 #' Compute the weighted Jaccard similarity matrix for a dgCMatrix, returning a
-#' symmetric sparse result. Uses \code{weighted_jaccard_sparse_fill} to compute
-#' min-sums only for column (or row) pairs that share at least one non-zero
-#' feature, then normalises to similarity. Only the upper triangle is computed,
-#' taking advantage of the symmetry of the Jaccard index.
+#' sparse result. Uses \code{weighted_jaccard_sparse_fill} to compute min-sums
+#' only for column (or row) pairs that share at least one non-zero feature, then
+#' normalises to similarity. Only the upper triangle is computed, taking
+#' advantage of the symmetry of the Jaccard index.
 #'
 #' @param x A dgCMatrix (sparse column-compressed matrix)
 #' @param transpose If \code{FALSE} (default), compare columns; if
@@ -13,7 +13,15 @@
 #'   \code{TRUE}).
 #' @param threads Number of threads for parallel computation (default 4).
 #'   Set to 0 to use all available cores.
-#' @return A symmetric sparse dsCMatrix similarity matrix
+#' @param triangle If \code{TRUE}, return a symmetric \code{dsCMatrix}
+#'   (upper triangle only). If \code{FALSE} (default), return a general
+#'   \code{dgCMatrix}.
+#' @param distance If \code{TRUE}, return distance (\code{1 - similarity})
+#'   instead of similarity. Default \code{FALSE}. A warning is issued since
+#'   sparse distance matrices are typically dense.
+#' @return A sparse similarity (or distance) matrix: \code{dsCMatrix} when
+#'   \code{triangle = TRUE}, \code{dgCMatrix} otherwise.
+#' @importFrom methods as
 #' @export
 #' @seealso \code{\link{c_weighted_jaccard_dense}} for the dense equivalent
 #' @examples
@@ -24,13 +32,22 @@
 #' c_weighted_jaccard_sparse(m)
 #' }
 c_weighted_jaccard_sparse <- function(x, transpose = FALSE, display_progress = TRUE,
-                                      threads = 4L) {
+                                      threads = 4L, triangle = FALSE,
+                                      distance = FALSE) {
+  if (distance)
+    warning("distance=TRUE with sparse output produces a mostly-dense matrix; ",
+            "consider using c_weighted_jaccard_dense() with triangle=TRUE instead.")
+
   crossfun <- if (transpose) Matrix::tcrossprod else Matrix::crossprod
   n <- if (transpose) nrow(x) else ncol(x)
 
   if (length(x@x) == 0L) {
-    return(Matrix::sparseMatrix(i = seq_len(n), j = seq_len(n), x = 1,
-                                dims = c(n, n), symmetric = TRUE))
+    sim_val <- if (distance) 0 else 1
+    m <- Matrix::sparseMatrix(i = seq_len(n), j = seq_len(n), x = sim_val,
+                              dims = c(n, n), symmetric = triangle)
+    if (!triangle)
+      m <- as(m, "generalMatrix")
+    return(m)
   }
 
   # Sparsity pattern from binarised crossprod — dsCMatrix (upper triangle)
@@ -54,9 +71,16 @@ c_weighted_jaccard_sparse <- function(x, transpose = FALSE, display_progress = T
   A@x[nonzero] <- A@x[nonzero] / denom[nonzero]
   A@x[!nonzero] <- 0
 
-  # Set diagonal to 1 — diagonal entries are in the upper triangle pattern
+  # Set diagonal to 1 for similarity
   diag_pos <- which(A@i + 1L == col_idx)
   A@x[diag_pos] <- 1
+
+  if (distance) {
+    A@x <- 1 - A@x  # diagonal 1→0, off-diag sim→1-sim
+  }
+
+  if (!triangle)
+    A <- as(A, "generalMatrix")
 
   A
 }

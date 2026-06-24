@@ -152,15 +152,17 @@ BEGIN_RCPP
 END_RCPP
 }
 // c_weighted_jaccard_dense
-NumericMatrix c_weighted_jaccard_dense(const S4& x, bool transpose, int threads);
-RcppExport SEXP _natcpp_c_weighted_jaccard_dense(SEXP xSEXP, SEXP transposeSEXP, SEXP threadsSEXP) {
+SEXP c_weighted_jaccard_dense(const S4& x, bool transpose, int threads, bool triangle, bool distance);
+RcppExport SEXP _natcpp_c_weighted_jaccard_dense(SEXP xSEXP, SEXP transposeSEXP, SEXP threadsSEXP, SEXP triangleSEXP, SEXP distanceSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const S4& >::type x(xSEXP);
     Rcpp::traits::input_parameter< bool >::type transpose(transposeSEXP);
     Rcpp::traits::input_parameter< int >::type threads(threadsSEXP);
-    rcpp_result_gen = Rcpp::wrap(c_weighted_jaccard_dense(x, transpose, threads));
+    Rcpp::traits::input_parameter< bool >::type triangle(triangleSEXP);
+    Rcpp::traits::input_parameter< bool >::type distance(distanceSEXP);
+    rcpp_result_gen = Rcpp::wrap(c_weighted_jaccard_dense(x, transpose, threads, triangle, distance));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -177,7 +179,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_natcpp_c_topntail_list", (DL_FUNC) &_natcpp_c_topntail_list, 1},
     {"_natcpp_c_EdgeListFromSegList", (DL_FUNC) &_natcpp_c_EdgeListFromSegList, 1},
     {"_natcpp_weighted_jaccard_sparse_fill", (DL_FUNC) &_natcpp_weighted_jaccard_sparse_fill, 5},
-    {"_natcpp_c_weighted_jaccard_dense", (DL_FUNC) &_natcpp_c_weighted_jaccard_dense, 3},
+    {"_natcpp_c_weighted_jaccard_dense", (DL_FUNC) &_natcpp_c_weighted_jaccard_dense, 5},
     {NULL, NULL, 0}
 };
 

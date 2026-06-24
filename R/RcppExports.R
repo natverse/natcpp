@@ -145,15 +145,21 @@ weighted_jaccard_sparse_fill <- function(x, pattern, transpose = FALSE, display_
 #' Compute the full weighted Jaccard similarity matrix for a dgCMatrix using
 #' an adaptive dense accumulation strategy. For small output matrices, uses a
 #' feature-oriented loop; for large outputs, switches to a column-oriented
-#' loop for better cache performance. Intended for internal use by
-#' \code{coconat::jaccard_sim}. See also \code{\link{c_weighted_jaccard_sparse}}.
+#' loop for better cache performance.
 #'
 #' @param x A dgCMatrix (sparse column-compressed matrix)
 #' @param transpose If \code{FALSE}, compare columns; if \code{TRUE}, compare
 #'   rows
-#' @return A dense numeric similarity matrix
+#' @param threads Number of threads (default 4). Set to 0 for all cores.
+#' @param triangle If \code{TRUE}, return only the lower triangle as a flat
+#'   numeric vector in \code{\link{dist}} layout. If \code{FALSE} (default),
+#'   return a full square matrix.
+#' @param distance If \code{TRUE}, return distance (\code{1 - similarity})
+#'   instead of similarity. Default \code{FALSE}.
+#' @return A dense numeric similarity matrix, or a numeric vector in dist
+#'   layout when \code{triangle = TRUE}.
 #' @export
-c_weighted_jaccard_dense <- function(x, transpose = FALSE, threads = 4L) {
-    .Call(`_natcpp_c_weighted_jaccard_dense`, x, transpose, threads)
+c_weighted_jaccard_dense <- function(x, transpose = FALSE, threads = 4L, triangle = FALSE, distance = FALSE) {
+    .Call(`_natcpp_c_weighted_jaccard_dense`, x, transpose, threads, triangle, distance)
 }
 
