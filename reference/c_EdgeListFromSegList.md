@@ -26,6 +26,7 @@ points will be dropped since they have no edges.
 ## Examples
 
 ``` r
+
 if (FALSE) { # \dontrun{
 library(nat)
 # make a neuron with multiple subtrees

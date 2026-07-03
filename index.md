@@ -23,12 +23,14 @@ Install the released version of natcpp from
 [CRAN](https://cran.r-project.org/package=natcpp) with:
 
 ``` r
+
 install.packages("natcpp")
 ```
 
 For the development version, please do:
 
 ``` r
+
 install.packages("natmanager")
 natmanager::install(pkgs = 'natverse/natcpp')
 ```
@@ -40,6 +42,7 @@ package (and that will automagically use natcpp when available). However
 to prove that everything is set up properly, you could do:
 
 ``` r
+
 library(nat)
 library(natcpp)
 topntail(as.seglist(Cell07PNs[[1]]))
