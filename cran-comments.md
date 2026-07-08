@@ -1,8 +1,8 @@
-Adds new functions for fast operations on 3D coordinates and indices
+natcpp v0.3.0 adds new functions for weighted jaccard similarity.
 
 ## Test environments
 * win-builder (devel)
-* local R installation, R 4.5.1
+* local R installation, R 4.6.1
 * Continuous Integration via GitHub actions
   * windows-latest (release)
   * macOS-latest (release)
@@ -12,6 +12,6 @@ Adds new functions for fast operations on 3D coordinates and indices
 
 ## R CMD check results
 
-https://win-builder.r-project.org/bK0J7np25XzB/
+https://win-builder.r-project.org/R208CfaEh25n
 
-0 errors | 0 warnings | 0 note
+0 errors | 0 warnings | 0 notes

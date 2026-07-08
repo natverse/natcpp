@@ -10,3 +10,4 @@
 ^CRAN-RELEASE$
 ^codecov\.yml$
 ^CRAN-SUBMISSION$
+^\.claude$
