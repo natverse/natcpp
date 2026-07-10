@@ -22,7 +22,3 @@
 - [`c_topntail()`](https://natverse.org/natcpp/reference/c_topntail.md)
   [`c_topntail_list()`](https://natverse.org/natcpp/reference/c_topntail.md)
   : Find the first and last elements of all vectors in a list
-- [`c_weighted_jaccard_dense()`](https://natverse.org/natcpp/reference/c_weighted_jaccard_dense.md)
-  : Dense weighted Jaccard similarity via C++
-- [`c_weighted_jaccard_sparse()`](https://natverse.org/natcpp/reference/c_weighted_jaccard_sparse.md)
-  : Sparse weighted Jaccard similarity via C++
