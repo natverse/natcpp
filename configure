@@ -1,0 +1,52 @@
+#!/bin/sh
+
+: "${R_HOME:=$(R RHOME)}"
+R="${R_HOME}/bin/R"
+
+CXX=$("${R}" CMD config CXX20)
+CXXSTD=$("${R}" CMD config CXX20STD)
+CXXFLAGS=$("${R}" CMD config CXX20FLAGS)
+
+if test -z "${CXX}"; then
+  CXX=$("${R}" CMD config CXX)
+  CXXSTD=$("${R}" CMD config CXXSTD)
+  CXXFLAGS=$("${R}" CMD config CXXFLAGS)
+fi
+
+CPPFLAGS=$("${R}" CMD config CPPFLAGS)
+LDFLAGS=$("${R}" CMD config LDFLAGS)
+
+cat > conftest.cpp <<'EOF'
+#include <atomic>
+#include <cstddef>
+
+struct State {
+  std::size_t pos;
+  std::size_t end;
+};
+
+int main() {
+  std::atomic<State> state;
+  State old_state{0, 0};
+  State new_state{1, 1};
+  state.compare_exchange_weak(old_state, new_state);
+  return 0;
+}
+EOF
+
+try_link() {
+  ${CXX} ${CXXSTD} ${CPPFLAGS} ${CXXFLAGS} conftest.cpp ${LDFLAGS} "$1" -o conftest >/dev/null 2>&1
+}
+
+LIBATOMIC=
+if try_link ""; then
+  :
+elif try_link "-latomic"; then
+  LIBATOMIC=" -latomic"
+else
+  echo "configure: WARNING: could not link C++ atomic compare/exchange test" >&2
+fi
+
+rm -rf conftest conftest.cpp conftest.dSYM
+
+sed "s|@LIBATOMIC@|${LIBATOMIC}|g" src/Makevars.in > src/Makevars
