@@ -8,7 +8,7 @@
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/natverse/natcpp/blob/v0.3.0/DESCRIPTION)
+[`DESCRIPTION`](https://github.com/natverse/natcpp/blob/master/DESCRIPTION)
 
 Jefferis G (2026). *natcpp: Fast C++ Primitives for the 'NeuroAnatomy
 Toolbox'*. R package version 0.3.0,
