@@ -73,3 +73,28 @@ test_that("real CA1 mesh: false positives outside, matches reference", {
   expect_equal(c_pointsinside(P, d$vertices, d$faces, threads = 2L),
                d$inside_ref)
 })
+
+test_that("fast (libigl) winding number agrees with brute force and oracle", {
+  # analytic tetrahedron
+  m <- tetra()
+  p <- rbind(c(0.2, 0.2, 0.2), c(0.1, 0.1, 0.1), c(2, 2, 2), c(0.6, 0.6, 0.6))
+  expect_equal(c_fast_pointsinside(p, m$V, m$F, threads = 2L),
+               c_pointsinside(p, m$V, m$F, threads = 2L))
+
+  f <- test_path("testdata", "ca1_mesh.rds")
+  skip_if_not(file.exists(f))
+  d <- readRDS(f)
+
+  # the known false positives are outside by the fast method too
+  expect_false(any(c_fast_pointsinside(d$false_positives, d$vertices, d$faces,
+                                       threads = 2L)))
+
+  # fast method matches the independent CGAL oracle on the bbox sample
+  set.seed(d$seed)
+  bb <- apply(d$vertices, 2, range)
+  P <- cbind(runif(d$n, bb[1, 1], bb[2, 1]),
+             runif(d$n, bb[1, 2], bb[2, 2]),
+             runif(d$n, bb[1, 3], bb[2, 3]))
+  expect_equal(c_fast_pointsinside(P, d$vertices, d$faces, threads = 2L),
+               d$inside_ref)
+})
