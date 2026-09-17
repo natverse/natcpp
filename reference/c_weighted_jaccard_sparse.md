@@ -14,7 +14,7 @@ c_weighted_jaccard_sparse(
   x,
   transpose = FALSE,
   display_progress = TRUE,
-  threads = 4L,
+  threads = NULL,
   triangle = FALSE,
   distance = FALSE
 )
@@ -37,8 +37,10 @@ c_weighted_jaccard_sparse(
 
 - threads:
 
-  Number of threads for parallel computation (default 4). Set to 0 to
-  use all available cores.
+  Number of threads for parallel computation. The default `NULL` applies
+  the package thread policy (respecting `getOption("Ncpus")` and the
+  `OMP_THREAD_LIMIT` environment variable, else 2). Set to 0 to use all
+  available cores.
 
 - triangle:
 

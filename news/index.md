@@ -1,6 +1,19 @@
 # Changelog
 
+## natcpp 0.3.1.9000
+
+- the `threads` argument of
+  [`c_weighted_jaccard_sparse()`](https://natverse.org/natcpp/reference/c_weighted_jaccard_sparse.md)
+  and
+  [`c_weighted_jaccard_dense()`](https://natverse.org/natcpp/reference/c_weighted_jaccard_dense.md)
+  now defaults to `NULL`, applying a package-wide thread policy
+  (respecting `getOption("Ncpus")` and `OMP_THREAD_LIMIT`, else a
+  conservative 2) rather than a hard-coded 4. Pass `threads = 0` for all
+  cores, or an integer to override. No new package dependency.
+
 ## natcpp 0.3.1
+
+CRAN release: 2026-07-20
 
 - fix package loading on CRAN’s Debian clang r-devel check by
   conditionally linking `libatomic` when the C++ atomic compare/exchange

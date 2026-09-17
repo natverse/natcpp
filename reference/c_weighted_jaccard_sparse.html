@@ -17,7 +17,7 @@ advantage of the symmetry of the Jaccard index."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">natcpp</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.1.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -60,7 +60,7 @@ advantage of the symmetry of the Jaccard index.</p>
 <span>  <span class="va">x</span>,</span>
 <span>  transpose <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  display_progress <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  threads <span class="op">=</span> <span class="fl">4L</span>,</span>
+<span>  threads <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  triangle <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  distance <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -85,8 +85,10 @@ advantage of the symmetry of the Jaccard index.</p>
 
 
 <dt id="arg-threads">threads<a class="anchor" aria-label="anchor" href="#arg-threads"></a></dt>
-<dd><p>Number of threads for parallel computation (default 4).
-Set to 0 to use all available cores.</p></dd>
+<dd><p>Number of threads for parallel computation. The default
+<code>NULL</code> applies the package thread policy (respecting
+<code>getOption("Ncpus")</code> and the <code>OMP_THREAD_LIMIT</code> environment
+variable, else 2). Set to 0 to use all available cores.</p></dd>
 
 
 <dt id="arg-triangle">triangle<a class="anchor" aria-label="anchor" href="#arg-triangle"></a></dt>

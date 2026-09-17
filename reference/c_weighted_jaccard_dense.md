@@ -1,10 +1,9 @@
 # Dense weighted Jaccard similarity via C++
 
 Compute the full weighted Jaccard similarity matrix for a
-[dgCMatrix](https://rdrr.io/pkg/Matrix/man/dgCMatrix-class.html) using
-an adaptive dense accumulation strategy. For small output matrices, uses
-a feature-oriented loop; for large outputs, switches to a
-column-oriented loop for better cache performance.
+[dgCMatrix](https://rdrr.io/pkg/Matrix/man/dgCMatrix-class.html),
+returning a dense matrix (or a
+[`dist`](https://rdrr.io/r/stats/dist.html)-layout vector).
 
 ## Usage
 
@@ -12,7 +11,7 @@ column-oriented loop for better cache performance.
 c_weighted_jaccard_dense(
   x,
   transpose = FALSE,
-  threads = 4L,
+  threads = NULL,
   triangle = FALSE,
   distance = FALSE
 )
@@ -31,7 +30,10 @@ c_weighted_jaccard_dense(
 
 - threads:
 
-  Number of threads (default 4). Set to 0 for all cores.
+  Number of threads for parallel computation. The default `NULL` applies
+  the package thread policy (respecting `getOption("Ncpus")` and the
+  `OMP_THREAD_LIMIT` environment variable, else 2). Set to 0 to use all
+  available cores.
 
 - triangle:
 
@@ -49,3 +51,25 @@ c_weighted_jaccard_dense(
 A dense numeric similarity matrix, or a numeric vector in
 [`dist`](https://rdrr.io/r/stats/dist.html) layout when
 `triangle = TRUE`.
+
+## Details
+
+Uses an adaptive dense accumulation strategy: for small output matrices
+a feature-oriented loop, switching to a column-oriented loop for larger
+outputs for better cache performance.
+
+## See also
+
+[`c_weighted_jaccard_sparse`](https://natverse.org/natcpp/reference/c_weighted_jaccard_sparse.md)
+for the sparse equivalent
+
+## Examples
+
+``` r
+if (FALSE) { # \dontrun{
+library(Matrix)
+m <- sparseMatrix(i = c(1,2,1,2,3,3), j = c(1,1,2,2,2,3),
+                  x = c(4,2,1,3,3,1), dims = c(3,3))
+c_weighted_jaccard_dense(m)
+} # }
+```
