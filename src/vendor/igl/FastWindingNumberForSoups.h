@@ -1,3 +1,12 @@
+// NATCPP: the single line below is the only local modification to this file,
+// which is otherwise an unmodified upstream Side Effects HDK amalgamation
+// (vendored via libigl). Marking it a system header makes GCC and Clang treat
+// its diagnostics as they would a toolchain header, silencing warnings from
+// this third-party code (e.g. -Wpedantic anonymous structs, -Wclass-memaccess)
+// without altering any semantics. This keeps `R CMD check` install-time clean
+// on CRAN without adding non-portable -Wno-* flags to Makevars.
+#pragma GCC system_header
+
 // This header created by issuing: `echo "// This header created by issuing: \`$BASH_COMMAND\` $(echo "" | cat - LICENSE README.md | sed -e "s#^..*#\/\/ &#") $(echo "" | cat - SYS_Types.h SYS_Math.h VM_SSEFunc.h VM_SIMDFunc.h VM_SIMD.h UT_Array.h UT_ArrayImpl.h UT_SmallArray.h UT_FixedVector.h UT_ParallelUtil.h UT_BVH.h UT_BVHImpl.h UT_SolidAngle.h UT_Array.cpp UT_SolidAngle.cpp | sed -e "s/^#.*include  *\".*$//g")" > ~/Repos/libigl/include/igl/FastWindingNumberForSoups.h` 
 // MIT License
 

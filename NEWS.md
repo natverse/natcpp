@@ -15,7 +15,9 @@
   bounding-volume hierarchy once and evaluates each query point in O(log F),
   scaling to millions of points on large meshes. Results match the brute-force
   method. libigl (MPL-2.0) is vendored under `src/vendor/igl`; requires
-  `RcppEigen`.
+  `RcppEigen`. The bundled Houdini HDK amalgamation is marked a system header
+  (one-line `#pragma`) so its third-party compiler warnings do not surface as
+  install-time `R CMD check` warnings.
 
 # natcpp 0.3.1
 
