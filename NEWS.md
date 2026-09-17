@@ -1,3 +1,11 @@
+# natcpp 0.3.1.9000
+
+* add `c_pointsinside()`, a robust point-in-mesh test based on the generalised
+  (solid-angle) winding number. Unlike a closest-point signed-distance test it
+  does not depend on surface normals, so it avoids the spurious "outside point
+  classified as inside" results that normal-based tests can give near thin
+  protrusions or sharp features. Parallelised over points with RcppThread.
+
 # natcpp 0.3.1
 
 * fix package loading on CRAN's Debian clang r-devel check by conditionally
