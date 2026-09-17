@@ -81,6 +81,20 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// c_mesh_winding_number
+NumericVector c_mesh_winding_number(NumericMatrix points, NumericMatrix vertices, IntegerMatrix faces, int threads);
+RcppExport SEXP _natcpp_c_mesh_winding_number(SEXP pointsSEXP, SEXP verticesSEXP, SEXP facesSEXP, SEXP threadsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type points(pointsSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type vertices(verticesSEXP);
+    Rcpp::traits::input_parameter< IntegerMatrix >::type faces(facesSEXP);
+    Rcpp::traits::input_parameter< int >::type threads(threadsSEXP);
+    rcpp_result_gen = Rcpp::wrap(c_mesh_winding_number(points, vertices, faces, threads));
+    return rcpp_result_gen;
+END_RCPP
+}
 // c_ListofMatrixRows
 List c_ListofMatrixRows(const SEXP& object);
 RcppExport SEXP _natcpp_c_ListofMatrixRows(SEXP objectSEXP) {
@@ -173,6 +187,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_natcpp_c_ijkpos", (DL_FUNC) &_natcpp_c_ijkpos, 5},
     {"_natcpp_c_sub2ind", (DL_FUNC) &_natcpp_c_sub2ind, 2},
     {"_natcpp_c_coords21dindex", (DL_FUNC) &_natcpp_c_coords21dindex, 5},
+    {"_natcpp_c_mesh_winding_number", (DL_FUNC) &_natcpp_c_mesh_winding_number, 4},
     {"_natcpp_c_ListofMatrixRows", (DL_FUNC) &_natcpp_c_ListofMatrixRows, 1},
     {"_natcpp_c_listlengths", (DL_FUNC) &_natcpp_c_listlengths, 1},
     {"_natcpp_c_topntail", (DL_FUNC) &_natcpp_c_topntail, 1},

@@ -1,0 +1,45 @@
+#' Test which points lie inside a triangle mesh (generalised winding number)
+#'
+#' @description Robust point-in-mesh test based on the generalised (solid-angle)
+#'   winding number. For a closed mesh the winding number is approximately
+#'   \eqn{\pm 1} for interior points and \eqn{0} for exterior points, so
+#'   \code{abs(w) > 0.5} classifies points as inside. Unlike a closest-point
+#'   signed-distance test it does not depend on surface normals and has no
+#'   ray-casting tie-breaking, so it does not produce the spurious "outside
+#'   point classified as inside" results that normal-based tests can give near
+#'   thin protrusions or sharp features.
+#'
+#' @details The mesh should be closed (watertight) and triangular; the result is
+#'   independent of face orientation (winding). This is a self-contained \eqn{O(P
+#'   \times F)} implementation (P points, F faces), parallelised over points with
+#'   \pkg{RcppThread}; it is intended as the accelerated back end for
+#'   \code{nat::pointsinside()}. For very large meshes combined with very large
+#'   point sets a spatially accelerated method (BVH / fast winding number) would
+#'   be faster.
+#'
+#' @param points An Nx3 matrix of query point coordinates (or anything
+#'   coercible with \code{as.matrix}).
+#' @param vertices An Nx3 matrix of mesh vertex coordinates.
+#' @param faces An Nx3 integer matrix of 1-based vertex indices (one triangle
+#'   per row), e.g. \code{t(mesh$it)} for an \pkg{rgl} \code{mesh3d}.
+#' @param threads Number of threads to use (default \code{4}, matching the rest
+#'   of \pkg{natcpp}). Set to \code{0} to use all available cores. Keep it at or
+#'   below 2 in package examples and tests to respect CRAN's core limit.
+#' @return For \code{c_pointsinside}, a logical vector of length \code{nrow(points)}
+#'   (\code{TRUE} = inside). For \code{c_mesh_winding_number}, the numeric
+#'   winding number for each point.
+#' @export
+#' @rdname c_pointsinside
+#' @examples
+#' \dontrun{
+#' # tetrahedron
+#' V <- rbind(c(0,0,0), c(1,0,0), c(0,1,0), c(0,0,1))
+#' F <- rbind(c(1,3,2), c(1,2,4), c(1,4,3), c(2,3,4))
+#' c_pointsinside(rbind(c(.2,.2,.2), c(2,2,2)), V, F)  # TRUE FALSE
+#' }
+c_pointsinside <- function(points, vertices, faces, threads = 4L) {
+  w <- c_mesh_winding_number(as.matrix(points), as.matrix(vertices),
+                             matrix(as.integer(faces), ncol = 3L),
+                             threads = threads)
+  abs(w) > 0.5
+}
