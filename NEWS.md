@@ -10,6 +10,12 @@
   does not depend on surface normals, so it avoids the spurious "outside point
   classified as inside" results that normal-based tests can give near thin
   protrusions or sharp features. Parallelised over points with RcppThread.
+* add an internal libigl-accelerated back end (`c_fast_mesh_winding_number()`,
+  "Fast Winding Numbers for Soups and Clouds", Barill et al. 2018) that builds a
+  bounding-volume hierarchy once and evaluates each query point in O(log F),
+  scaling to millions of points on large meshes. Results match the brute-force
+  method. libigl (MPL-2.0) is vendored under `src/vendor/igl`; requires
+  `RcppEigen`.
 
 # natcpp 0.3.1
 
