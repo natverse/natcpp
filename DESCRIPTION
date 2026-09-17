@@ -3,11 +3,14 @@ Package: natcpp
 Title: Fast C++ Primitives for the 'NeuroAnatomy Toolbox'
 Version: 0.3.1.9000
 Authors@R: 
-    person(given = "Gregory",
-           family = "Jefferis",
-           role = c("aut", "cre"),
-           email = "jefferis@gmail.com",
-           comment = c(ORCID = "0000-0002-0587-9355"))
+    c(person(given = "Gregory",
+             family = "Jefferis",
+             role = c("aut", "cre"),
+             email = "jefferis@gmail.com",
+             comment = c(ORCID = "0000-0002-0587-9355")),
+      person(given = "libigl contributors",
+             role = c("ctb", "cph"),
+             comment = "bundled libigl fast winding number code (MPL-2.0); see src/vendor/README.md"))
 Description: Fast functions implemented in C++ via 'Rcpp' to support the
     'NeuroAnatomy Toolbox' ('nat') ecosystem. These functions provide large
     speed-ups for basic manipulation of neuronal skeletons over pure R
@@ -27,6 +30,7 @@ Suggests:
     testthat (>= 3.0.0)
 LinkingTo:
     Rcpp,
+    RcppEigen,
     RcppThread
 Config/testthat/edition: 3
 Encoding: UTF-8
