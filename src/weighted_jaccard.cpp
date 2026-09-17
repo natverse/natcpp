@@ -268,27 +268,10 @@ static FeatureCSR build_feature_csr(const IntegerVector& xi, const IntegerVector
   return csr;
 }
 
-//' Dense weighted Jaccard similarity via C++
-//'
-//' Compute the full weighted Jaccard similarity matrix for a
-//' \link[Matrix:dgCMatrix-class]{dgCMatrix} using
-//' an adaptive dense accumulation strategy. For small output matrices, uses a
-//' feature-oriented loop; for large outputs, switches to a column-oriented
-//' loop for better cache performance.
-//'
-//' @param x A \link[Matrix:dgCMatrix-class]{dgCMatrix} (sparse column-compressed matrix)
-//' @param transpose If \code{FALSE}, compare columns; if \code{TRUE}, compare
-//'   rows
-//' @param threads Number of threads (default 4). Set to 0 for all cores.
-//' @param triangle If \code{TRUE}, return only the lower triangle as a flat
-//'   numeric vector in \code{\link{dist}} layout. If \code{FALSE} (default),
-//'   return a full square matrix.
-//' @param distance If \code{TRUE}, return distance (\code{1 - similarity})
-//'   instead of similarity. Default \code{FALSE}.
-//' @return A dense numeric similarity matrix, or a numeric vector in
-//'   \code{\link{dist}} layout when \code{triangle = TRUE}.
-//' @export
-// [[Rcpp::export]]
+// Internal back end for the dense weighted Jaccard similarity. The exported,
+// documented R interface c_weighted_jaccard_dense() (R/weighted_jaccard.R)
+// resolves the thread count and calls this.
+// [[Rcpp::export(weighted_jaccard_dense_impl)]]
 SEXP c_weighted_jaccard_dense(const S4& x, bool transpose = false,
                               int threads = 4, bool triangle = false,
                               bool distance = false) {

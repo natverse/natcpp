@@ -8,7 +8,7 @@ c_weighted_jaccard_sparse(
   x,
   transpose = FALSE,
   display_progress = TRUE,
-  threads = 4L,
+  threads = NULL,
   triangle = FALSE,
   distance = FALSE
 )
@@ -22,8 +22,10 @@ c_weighted_jaccard_sparse(
 \item{display_progress}{Whether to show a text progress bar (default
 \code{TRUE}).}
 
-\item{threads}{Number of threads for parallel computation (default 4).
-Set to 0 to use all available cores.}
+\item{threads}{Number of threads for parallel computation. The default
+\code{NULL} applies the package thread policy (respecting
+\code{getOption("Ncpus")} and the \code{OMP_THREAD_LIMIT} environment
+variable, else 2). Set to 0 to use all available cores.}
 
 \item{triangle}{If \code{TRUE}, return a symmetric \code{dsCMatrix}
 (upper triangle only). If \code{FALSE} (default), return a general

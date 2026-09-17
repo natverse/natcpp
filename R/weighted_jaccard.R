@@ -12,8 +12,10 @@
 #'   \code{TRUE}, compare rows.
 #' @param display_progress Whether to show a text progress bar (default
 #'   \code{TRUE}).
-#' @param threads Number of threads for parallel computation (default 4).
-#'   Set to 0 to use all available cores.
+#' @param threads Number of threads for parallel computation. The default
+#'   \code{NULL} applies the package thread policy (respecting
+#'   \code{getOption("Ncpus")} and the \code{OMP_THREAD_LIMIT} environment
+#'   variable, else 2). Set to 0 to use all available cores.
 #' @param triangle If \code{TRUE}, return a symmetric \code{dsCMatrix}
 #'   (upper triangle only). If \code{FALSE} (default), return a general
 #'   \link[Matrix:dgCMatrix-class]{dgCMatrix}.
@@ -33,8 +35,9 @@
 #' c_weighted_jaccard_sparse(m)
 #' }
 c_weighted_jaccard_sparse <- function(x, transpose = FALSE, display_progress = TRUE,
-                                      threads = 4L, triangle = FALSE,
+                                      threads = NULL, triangle = FALSE,
                                       distance = FALSE) {
+  threads <- natcpp_threads(threads)
   if (distance)
     warning("distance=TRUE with sparse output produces a mostly-dense matrix; ",
             "consider using c_weighted_jaccard_dense() with triangle=TRUE instead.")
@@ -84,4 +87,44 @@ c_weighted_jaccard_sparse <- function(x, transpose = FALSE, display_progress = T
     A <- as(A, "generalMatrix")
 
   A
+}
+
+#' Dense weighted Jaccard similarity via C++
+#'
+#' Compute the full weighted Jaccard similarity matrix for a
+#' \link[Matrix:dgCMatrix-class]{dgCMatrix}, returning a dense matrix (or a
+#' \code{\link{dist}}-layout vector).
+#'
+#' @details Uses an adaptive dense accumulation strategy: for small output
+#'   matrices a feature-oriented loop, switching to a column-oriented loop for
+#'   larger outputs for better cache performance.
+#'
+#' @param x A \link[Matrix:dgCMatrix-class]{dgCMatrix} (sparse column-compressed matrix)
+#' @param transpose If \code{FALSE}, compare columns; if \code{TRUE}, compare
+#'   rows
+#' @param threads Number of threads for parallel computation. The default
+#'   \code{NULL} applies the package thread policy (respecting
+#'   \code{getOption("Ncpus")} and the \code{OMP_THREAD_LIMIT} environment
+#'   variable, else 2). Set to 0 to use all available cores.
+#' @param triangle If \code{TRUE}, return only the lower triangle as a flat
+#'   numeric vector in \code{\link{dist}} layout. If \code{FALSE} (default),
+#'   return a full square matrix.
+#' @param distance If \code{TRUE}, return distance (\code{1 - similarity})
+#'   instead of similarity. Default \code{FALSE}.
+#' @return A dense numeric similarity matrix, or a numeric vector in
+#'   \code{\link{dist}} layout when \code{triangle = TRUE}.
+#' @export
+#' @seealso \code{\link{c_weighted_jaccard_sparse}} for the sparse equivalent
+#' @examples
+#' \dontrun{
+#' library(Matrix)
+#' m <- sparseMatrix(i = c(1,2,1,2,3,3), j = c(1,1,2,2,2,3),
+#'                   x = c(4,2,1,3,3,1), dims = c(3,3))
+#' c_weighted_jaccard_dense(m)
+#' }
+c_weighted_jaccard_dense <- function(x, transpose = FALSE, threads = NULL,
+                                     triangle = FALSE, distance = FALSE) {
+  threads <- natcpp_threads(threads)
+  weighted_jaccard_dense_impl(x, transpose = transpose, threads = threads,
+                              triangle = triangle, distance = distance)
 }

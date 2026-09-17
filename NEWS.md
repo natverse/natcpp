@@ -1,3 +1,11 @@
+# natcpp 0.3.1.9000
+
+* the `threads` argument of `c_weighted_jaccard_sparse()` and
+  `c_weighted_jaccard_dense()` now defaults to `NULL`, applying a package-wide
+  thread policy (respecting `getOption("Ncpus")` and `OMP_THREAD_LIMIT`, else a
+  conservative 2) rather than a hard-coded 4. Pass `threads = 0` for all cores,
+  or an integer to override. No new package dependency.
+
 # natcpp 0.3.1
 
 * fix package loading on CRAN's Debian clang r-devel check by conditionally
