@@ -10,36 +10,72 @@
 #'   thin protrusions or sharp features.
 #'
 #' @details The mesh should be closed (watertight) and triangular; the result is
-#'   independent of face orientation (winding). This is a self-contained \eqn{O(P
-#'   \times F)} implementation (P points, F faces), parallelised over points with
-#'   \pkg{RcppThread}; it is intended as the accelerated back end for
-#'   \code{nat::pointsinside()}. For very large meshes combined with very large
-#'   point sets a spatially accelerated method (BVH / fast winding number) would
-#'   be faster.
+#'   independent of face orientation (winding). It is intended as the
+#'   accelerated back end for \code{nat::pointsinside()}.
+#'
+#'   Two back ends are available, selected by \code{method}:
+#'   \describe{
+#'     \item{\code{"bruteforce"}}{A self-contained \eqn{O(P \times F)}
+#'       implementation (P points, F faces), parallelised over points with
+#'       \pkg{RcppThread}. No setup cost, so it is fastest for small meshes.}
+#'     \item{\code{"bvh"}}{libigl's "Fast Winding Numbers for Soups and Clouds"
+#'       (Barill et al. 2018): a bounding-volume hierarchy is built once over
+#'       the mesh and each query point is then evaluated in \eqn{O(\log F)}, so
+#'       it scales to millions of points on meshes of tens of thousands of
+#'       faces. \code{accuracy} tunes the multipole approximation.}
+#'   }
+#'   \code{"auto"} (the default) picks \code{"bvh"} only for large meshes queried
+#'   by enough points to amortise building the hierarchy, and \code{"bruteforce"}
+#'   otherwise (so a simple mesh such as a cuboid always uses brute force). The
+#'   two back ends agree to within the winding-number tolerance.
 #'
 #' @param points An Nx3 matrix of query point coordinates (or anything
 #'   coercible with \code{as.matrix}).
 #' @param vertices An Nx3 matrix of mesh vertex coordinates.
 #' @param faces An Nx3 integer matrix of 1-based vertex indices (one triangle
 #'   per row), e.g. \code{t(mesh$it)} for an \pkg{rgl} \code{mesh3d}.
-#' @param threads Number of threads to use (default \code{4}, matching the rest
-#'   of \pkg{natcpp}). Set to \code{0} to use all available cores. Keep it at or
-#'   below 2 in package examples and tests to respect CRAN's core limit.
-#' @return For \code{c_pointsinside}, a logical vector of length \code{nrow(points)}
-#'   (\code{TRUE} = inside). For \code{c_mesh_winding_number}, the numeric
-#'   winding number for each point.
+#' @param method Winding-number back end: \code{"auto"} (default), \code{"bvh"}
+#'   or \code{"bruteforce"}. See \strong{Details}.
+#' @param threads Number of threads for parallel computation. The default
+#'   \code{NULL} applies the package thread policy (respecting
+#'   \code{getOption("Ncpus")} and the \code{OMP_THREAD_LIMIT} environment
+#'   variable, else 2). Set to 0 to use all available cores.
+#' @param accuracy libigl accuracy-scale parameter for \code{method = "bvh"}
+#'   (default 2); ignored by the brute-force back end.
+#' @return A logical vector of length \code{nrow(points)} (\code{TRUE} = inside).
 #' @export
-#' @rdname c_pointsinside
 #' @examples
-#' \dontrun{
 #' # tetrahedron
 #' V <- rbind(c(0,0,0), c(1,0,0), c(0,1,0), c(0,0,1))
 #' F <- rbind(c(1,3,2), c(1,2,4), c(1,4,3), c(2,3,4))
 #' c_pointsinside(rbind(c(.2,.2,.2), c(2,2,2)), V, F)  # TRUE FALSE
-#' }
-c_pointsinside <- function(points, vertices, faces, threads = 4L) {
-  w <- c_mesh_winding_number(as.matrix(points), as.matrix(vertices),
-                             matrix(as.integer(faces), ncol = 3L),
-                             threads = threads)
+c_pointsinside <- function(points, vertices, faces,
+                           method = c("auto", "bvh", "bruteforce"),
+                           threads = NULL, accuracy = 2) {
+  method <- match.arg(method)
+  points <- as.matrix(points)
+  vertices <- as.matrix(vertices)
+  faces <- matrix(as.integer(faces), ncol = 3L)
+  threads <- natcpp_threads(threads)
+
+  if (method == "auto") {
+    nf <- nrow(faces)
+    # The libigl BVH has a fixed build cost (~O(F log F)); above ~1000 faces it
+    # amortises quickly and then far outperforms the brute-force O(P*F) test
+    # (measured ~4x at 7k faces, ~25x at 50k). A mistaken "bvh" choice only ever
+    # costs that bounded build, whereas a mistaken "bruteforce" on a large mesh
+    # costs seconds, so we lean towards bvh once the mesh is non-trivial --
+    # except for tiny total workloads, where brute force is instant and needs no
+    # build (a cuboid, F=12, always lands in brute force).
+    method <- if (nf >= 1000L && as.double(nrow(points)) * nf >= 1e6)
+      "bvh" else "bruteforce"
+  }
+
+  w <- if (method == "bvh")
+    c_fast_mesh_winding_number(points, vertices, faces, threads = threads,
+                               accuracy = accuracy)
+  else
+    c_mesh_winding_number(points, vertices, faces, threads = threads)
+
   abs(w) > 0.5
 }

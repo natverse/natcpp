@@ -58,7 +58,7 @@ test_that("real CA1 mesh: false positives outside, matches reference", {
 
   # the four points a normal-based test wrongly called inside are all outside
   expect_false(any(c_pointsinside(d$false_positives, d$vertices, d$faces,
-                                  threads = 2L)))
+                                  method = "bruteforce", threads = 2L)))
   expect_equal(c_mesh_winding_number(d$false_positives, d$vertices, d$faces,
                                      threads = 2L),
                rep(0, nrow(d$false_positives)), tolerance = 1e-3)
@@ -70,31 +70,33 @@ test_that("real CA1 mesh: false positives outside, matches reference", {
              runif(d$n, bb[1, 2], bb[2, 2]),
              runif(d$n, bb[1, 3], bb[2, 3]))
   stopifnot(identical(dim(P), dim(d$points)))   # reproducible sample
-  expect_equal(c_pointsinside(P, d$vertices, d$faces, threads = 2L),
+  expect_equal(c_pointsinside(P, d$vertices, d$faces,
+                              method = "bruteforce", threads = 2L),
                d$inside_ref)
 })
 
-test_that("fast (libigl) winding number agrees with brute force and oracle", {
+test_that("bvh (libigl) back end agrees with brute force and oracle", {
   # analytic tetrahedron
   m <- tetra()
   p <- rbind(c(0.2, 0.2, 0.2), c(0.1, 0.1, 0.1), c(2, 2, 2), c(0.6, 0.6, 0.6))
-  expect_equal(c_fast_pointsinside(p, m$V, m$F, threads = 2L),
-               c_pointsinside(p, m$V, m$F, threads = 2L))
+  expect_equal(c_pointsinside(p, m$V, m$F, method = "bvh", threads = 2L),
+               c_pointsinside(p, m$V, m$F, method = "bruteforce", threads = 2L))
 
   f <- test_path("testdata", "ca1_mesh.rds")
   skip_if_not(file.exists(f))
   d <- readRDS(f)
 
-  # the known false positives are outside by the fast method too
-  expect_false(any(c_fast_pointsinside(d$false_positives, d$vertices, d$faces,
-                                       threads = 2L)))
+  # the known false positives are outside by the bvh method too
+  expect_false(any(c_pointsinside(d$false_positives, d$vertices, d$faces,
+                                  method = "bvh", threads = 2L)))
 
-  # fast method matches the independent CGAL oracle on the bbox sample
+  # bvh method matches the independent CGAL oracle on the bbox sample
   set.seed(d$seed)
   bb <- apply(d$vertices, 2, range)
   P <- cbind(runif(d$n, bb[1, 1], bb[2, 1]),
              runif(d$n, bb[1, 2], bb[2, 2]),
              runif(d$n, bb[1, 3], bb[2, 3]))
-  expect_equal(c_fast_pointsinside(P, d$vertices, d$faces, threads = 2L),
+  expect_equal(c_pointsinside(P, d$vertices, d$faces,
+                              method = "bvh", threads = 2L),
                d$inside_ref)
 })
