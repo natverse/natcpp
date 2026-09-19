@@ -57,6 +57,14 @@ c_coords21dindex <- function(xyz, origin, voxdims, dims, clamp = FALSE) {
     .Call(`_natcpp_c_coords21dindex`, xyz, origin, voxdims, dims, clamp)
 }
 
+c_fast_mesh_winding_number <- function(points, vertices, faces, threads = 4L, accuracy = 2.0) {
+    .Call(`_natcpp_c_fast_mesh_winding_number`, points, vertices, faces, threads, accuracy)
+}
+
+c_mesh_winding_number <- function(points, vertices, faces, threads = 4L) {
+    .Call(`_natcpp_c_mesh_winding_number`, points, vertices, faces, threads)
+}
+
 #' Convert a matrix into list of row vectors
 #'
 #' @details Typically this will be for 3D coordinates but there are no limits
