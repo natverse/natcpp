@@ -5,6 +5,10 @@
 - **Gregory Jefferis**. Author, maintainer.
   [](https://orcid.org/0000-0002-0587-9355)
 
+- **libigl contributors**. Contributor, copyright holder.  
+  bundled libigl fast winding number code (MPL-2.0); see
+  src/vendor/README.md
+
 ## Citation
 
 Source:

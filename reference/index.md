@@ -14,6 +14,9 @@
 - [`c_listlengths()`](https://natverse.org/natcpp/reference/c_listlengths.md)
   : A simple function to compute the lengths of the elements of an R
   list
+- [`c_pointsinside()`](https://natverse.org/natcpp/reference/c_pointsinside.md)
+  : Test which points lie inside a triangle mesh (generalised winding
+  number)
 - [`c_seglengths()`](https://natverse.org/natcpp/reference/c_seglengths.md)
   [`c_total_cable()`](https://natverse.org/natcpp/reference/c_seglengths.md)
   : Compute summed segment lengths or total cable

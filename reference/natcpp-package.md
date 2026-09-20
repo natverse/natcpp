@@ -27,3 +27,8 @@ Authors:
 
 - Gregory Jefferis <jefferis@gmail.com>
   ([ORCID](https://orcid.org/0000-0002-0587-9355))
+
+Other contributors:
+
+- libigl contributors (bundled libigl fast winding number code
+  (MPL-2.0); see src/vendor/README.md) \[contributor, copyright holder\]

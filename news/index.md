@@ -10,6 +10,26 @@
   (respecting `getOption("Ncpus")` and `OMP_THREAD_LIMIT`, else a
   conservative 2) rather than a hard-coded 4. Pass `threads = 0` for all
   cores, or an integer to override. No new package dependency.
+- add
+  [`c_pointsinside()`](https://natverse.org/natcpp/reference/c_pointsinside.md),
+  a robust point-in-mesh test based on the generalised (solid-angle)
+  winding number. Unlike a closest-point signed-distance test it does
+  not depend on surface normals, so it avoids the spurious “outside
+  point classified as inside” results that normal-based tests can give
+  near thin protrusions or sharp features. `threads = NULL` applies the
+  package thread policy.
+- `c_pointsinside(method=)` selects the winding-number back end:
+  `"bruteforce"` is a self-contained O(P\*F) test parallelised over
+  points with RcppThread; `"bvh"` uses libigl’s “Fast Winding Numbers
+  for Soups and Clouds” (Barill et al. 2018), building a bounding-volume
+  hierarchy once and evaluating each query point in O(log F) so it
+  scales to millions of points on large meshes. The default `"auto"`
+  picks `"bvh"` for large meshes and `"bruteforce"` otherwise; the two
+  agree to within the winding-number tolerance. libigl (MPL-2.0) is
+  vendored under `src/vendor/igl` and requires `RcppEigen`; its bundled
+  Houdini HDK amalgamation is marked a system header (one-line
+  `#pragma`) so its third-party compiler warnings do not surface as
+  install-time `R CMD check` warnings.
 
 ## natcpp 0.3.1
 
