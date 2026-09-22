@@ -1,6 +1,6 @@
 # Changelog
 
-## natcpp 0.3.1.9000
+## natcpp 0.3.2
 
 - the `threads` argument of
   [`c_weighted_jaccard_sparse()`](https://natverse.org/natcpp/reference/c_weighted_jaccard_sparse.md)
@@ -30,6 +30,9 @@
   Houdini HDK amalgamation is marked a system header (one-line
   `#pragma`) so its third-party compiler warnings do not surface as
   install-time `R CMD check` warnings.
+
+**Full Changelog**:
+<https://github.com/natverse/natcpp/compare/v0.3.1>…v0.3.2
 
 ## natcpp 0.3.1
 
