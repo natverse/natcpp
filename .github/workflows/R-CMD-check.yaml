@@ -38,7 +38,11 @@ jobs:
         with:
           r-version: ${{ matrix.config.r }}
           http-user-agent: ${{ matrix.config.http-user-agent }}
-          use-public-rspm: true
+          # 'always' (not just 'true') forces macOS through Posit Package
+          # Manager, which still serves gzip binaries. Works around CRAN's
+          # macOS zstd .tgz binaries that pak/pkgdepends cannot yet extract
+          # ("unknown archive type"): https://github.com/r-lib/pkgdepends/issues/485
+          use-public-rspm: always
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
