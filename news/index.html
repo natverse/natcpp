@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">natcpp</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.2.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -31,12 +31,9 @@
   <main id="main" class="col-md-9"><div class="page-header">
 
       <h1>Changelog</h1>
-      <small>Source: <a href="https://github.com/natverse/natcpp/blob/master/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
+      <small>Source: <a href="https://github.com/natverse/natcpp/blob/v0.3.2/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="0.3.2.9000" id="natcpp-0329000">natcpp 0.3.2.9000<a class="anchor" aria-label="anchor" href="#natcpp-0329000"></a></h2>
-</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.3.2" id="natcpp-032">natcpp 0.3.2<a class="anchor" aria-label="anchor" href="#natcpp-032"></a></h2>
 <ul><li>the <code>threads</code> argument of <code><a href="../reference/c_weighted_jaccard_sparse.html">c_weighted_jaccard_sparse()</a></code> and <code><a href="../reference/c_weighted_jaccard_dense.html">c_weighted_jaccard_dense()</a></code> now defaults to <code>NULL</code>, applying a package-wide thread policy (respecting <code>getOption("Ncpus")</code> and <code>OMP_THREAD_LIMIT</code>, else a conservative 2) rather than a hard-coded 4. Pass <code>threads = 0</code> for all cores, or an integer to override. No new package dependency.</li>
